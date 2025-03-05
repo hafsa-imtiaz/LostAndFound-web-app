@@ -43,6 +43,7 @@ Before running the project, install the following:
   - **Live Server** (for running the frontend).
   - **Spring Boot Extension Pack** (for backend development).
   - **Java Extension Pack** (for Java support).
+  - **Lombok Annotations Support for VS Code**
 
 ---
 
@@ -80,7 +81,7 @@ The backend is located in **`com.example.LostAndFound`**, which includes:
 
 3. Run the backend:
    - In **VS Code**, open the main class (`LostAndFoundApplication.java`).
-   - Click **Run** or execute:
+   - Click **Run** or execute this command in directory containing pom.xml:
      ```bash
      mvn spring-boot:run
      ```
