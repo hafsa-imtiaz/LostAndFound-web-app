@@ -43,6 +43,7 @@ Before running the project, install the following:
   - **Live Server** (for running the frontend).
   - **Spring Boot Extension Pack** (for backend development).
   - **Java Extension Pack** (for Java support).
+  - **Lombok Annotations Support for VS Code**
 
 ---
 
