@@ -18,6 +18,14 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    public Optional<User> getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     public String registerUser(User user) {
         // Check if email already exists
         Optional<User> existingUserByEmail = userRepository.findByEmail(user.getEmail());
@@ -46,9 +54,8 @@ public class UserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             
-            // Check if the password matches the stored hashed password
             if (passwordEncoder.matches(password, user.getPassword())) {
-                return user; // Successful login
+                return user;
             }
         }
         

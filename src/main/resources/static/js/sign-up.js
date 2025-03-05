@@ -47,15 +47,20 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (response.ok) {
+                console.log("yahan");
+                const user = await response.json(); // Extract user data
+                console.log("yahan");
+                localStorage.setItem("loggedInUser", user.username); // Store logged-in user's username
                 window.location.href = "userhome.html"; // Redirect to user dashboard
             } else {
                 const errorData = await response.json();
-                loginError.textContent = errorData.message || "Log-In failed. Invalid Email or Password Please try again.";
+                loginError.textContent = errorData.message || "Log-In failed. Invalid Email or Password. Please try again.";
             }
         } catch (error) {
             alert("Server error. Please try again later.");
         }
     });
+
 
     // Handle Signup Form Submission
     signupForm.addEventListener("submit", async (e) => {
@@ -64,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const firstName = document.getElementById("fname").value;
         const lastName = document.getElementById("lname").value;
         const username = document.getElementById("username").value;
-        const dob = document.getElementById("dob").value;
+        const date_of_birth = document.getElementById("dob").value;
         const gender = document.getElementById("gender").value;
         const email = document.getElementById("signupEmail").value;
         const password = document.getElementById("signupPassword").value;
@@ -82,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch("http://localhost:8080/api/users/signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ firstName, lastName, username, dob, gender, email, password }),
+                body: JSON.stringify({ firstName, lastName, username, date_of_birth, gender, email, password }),
             });
 
             if (response.ok) {

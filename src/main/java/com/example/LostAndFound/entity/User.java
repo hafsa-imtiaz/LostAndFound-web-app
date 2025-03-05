@@ -42,7 +42,9 @@ public class User {
     private String password; // Will store a hashed password
 
     @Past(message = "Date of birth must be in the past")
-    private Date dateOfBirth;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date_of_birth") // Matches DB column
+    private Date date_of_birth;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
