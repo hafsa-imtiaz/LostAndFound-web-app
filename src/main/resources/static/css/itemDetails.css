@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 2rem;
+}
+
+.welcome-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #0083b0;
+    color: white;
+    padding: 2rem;
+    position: fixed;
+    height: 100%;
+    
+}
+
+.sidebar-header {
+    margin-bottom: 2rem;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-item {
+    background: #006a8d;
+    margin: 0rem 0;
+    padding: 0.8rem 2rem;
+    border-radius: 0;
+    cursor: pointer;
+    transition: 0.3s;
+    width: calc(100% + 4rem);
+    height: 4rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+.item-details {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 2rem;
+}
+
+.item-details .item-images {
+    flex: 1;
+    max-width: 50%;
+}
+
+.item-details .main-image {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.item-details .thumbnail-gallery {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.item-details .thumbnail-gallery img {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.item-details .thumbnail-gallery img:hover {
+    transform: scale(1.1);
+}
+
+.item-details .item-info {
+    flex: 1;
+}
+
+.item-details h2 {
+    margin-bottom: 1rem;
+    color: #0083b0;
+    font-size: 1.8rem;
+}
+
+.item-details p {
+    margin: 0.5rem 0;
+    color: #666;
+    font-size: 1rem;
+}
+
+.item-details p strong {
+    color: #333;
+}
+
+.item-details .action-btn {
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background: #0083b0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.item-details .action-btn:hover {
+    background: #00b4db;
+}
+

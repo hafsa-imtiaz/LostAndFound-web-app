@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Item | Lost & Found</title>
+    <link rel="stylesheet" href="./css/Reports.css"> <!-- Link to your existing CSS -->
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar (Same as Dashboard) -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Lost & Found System</h2>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="nav-item">Home</li>
+                <li class="nav-item">Report Items</li>
+                <li class="nav-item">Search Items</li>
+                <li class="nav-item">Profile Settings</li>
+                <li class="nav-item">Help Center</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="welcome-section">
+                <h1>Report Item</h1>
+                <p>Submit details about a lost or found item.</p>
+            </div>
+
+            <!-- Report Item Form -->
+            <div class="report-form">
+                <form id="reportItemForm">
+                    <!-- Item Type (Lost/Found) -->
+                    <div class="form-group">
+                        <label for="itemType">Item Type</label>
+                        <select id="itemType" required>
+                            <option value="">Select Type</option>
+                            <option value="lost">Lost Item</option>
+                            <option value="found">Found Item</option>
+                        </select>
+                    </div>
+
+                    <!-- Item Name -->
+                    <div class="form-group">
+                        <label for="itemName">Item Name</label>
+                        <input type="text" id="itemName" placeholder="Enter item name" required>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" required>
+                            <option value="">Select Category</option>
+                            <option>Electronics</option>
+                            <option>Documents</option>
+                            <option>Clothing</option>
+                            <option>Accessories</option>
+                        </select>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" placeholder="Describe the item (color, unique features, etc.)"
+                            rows="4" required></textarea>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="Where was it lost/found?" required>
+                    </div>
+
+                    <!-- Date -->
+                    <div class="form-group">
+                        <label for="date">Date Lost/Found</label>
+                        <input type="date" id="date">
+                    </div>
+
+                    <!-- Image Upload -->
+                    <div class="form-group">
+                        <label for="itemImage">Upload Image (Optional)</label>
+                        <input type="file" id="itemImage" accept="image/*">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="action-btn">Submit Report</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

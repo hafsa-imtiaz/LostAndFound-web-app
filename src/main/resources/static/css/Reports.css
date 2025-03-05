@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 2rem;
+}
+
+.welcome-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #0083b0;
+    color: white;
+    padding: 2rem;
+    position: fixed;
+    height: 100%;
+}
+
+.sidebar-header {
+    margin-bottom: 2rem;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0; /* Remove default padding */
+}
+
+.nav-item {
+    background: #006a8d;
+    margin: 0rem 0;
+    padding: 0.8rem 2rem;
+    border-radius: 0;
+    cursor: pointer;
+    transition: 0.3s;
+    width: calc(100% + 4rem);
+    height: 4rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+/* Report Item Page */
+
+.report-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.report-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.report-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #0083b0;
+}
+
+.report-form input[type="text"],
+.report-form input[type="date"],
+.report-form select,
+.report-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-top: 0.3rem;
+}
+
+.report-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.report-form input[type="file"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    background: white;
+    cursor: pointer;
+}
+
+.report-form .action-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    background: #0083b0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.report-form .action-btn:hover {
+    background: #00b4db;
+}

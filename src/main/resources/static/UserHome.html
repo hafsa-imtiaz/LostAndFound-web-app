@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Lost & Found</title>
+    <link rel = "stylesheet" href = "./css/UserHome.css"></link>
+</head>
+<body>
+    <div class="dashboard-container">
+
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Lost & Found System</h2>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="nav-item">Home</li>
+                <li class="nav-item">Report Items</li>
+                <li class="nav-item">Search Items</li>
+                <li class="nav-item">Profile Settings</li>
+                <li class="nav-item">Help Center</li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="welcome-section">
+                <h1>Welcome back, Aoun Jee</h1>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Active Lost Reports</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Found Items Reported</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Successful Matches</div>
+                </div>
+            </div>
+
+            <!-- <div class="quick-actions">
+                <button class="action-btn">Report Lost Item</button>
+                <button class="action-btn">Report Found Item</button>
+                <button class="action-btn">Search Lost Items</button>
+                <button class="action-btn">Search Found Items</button>
+            </div> -->
+
+            <div class="recent-activity">
+                <h2>Recent Activity</h2>
+                <table class="activity-table">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Black Leather Wallet</td>
+                            <td>Lost Item</td>
+                            <td>2023-12-01</td>
+                            <td><span class="status lost">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>Silver Smartwatch</td>
+                            <td>Found Item</td>
+                            <td>2023-12-02</td>
+                            <td><span class="status found">Claimed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src = "script.js"></script>
+</body>
+</html>

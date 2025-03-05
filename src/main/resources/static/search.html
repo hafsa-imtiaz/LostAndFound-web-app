@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Items | Lost & Found</title>
+    <link rel="stylesheet" href="./css/search.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar (Same as Dashboard) -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Lost & Found System</h2>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="nav-item">Home</li>
+                <li class="nav-item">Report Items</li>
+                <li class="nav-item">Search Items</li>
+                <li class="nav-item">Profile Settings</li>
+                <li class="nav-item">Help Center</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="welcome-section">
+                <h1>Search Items</h1>
+            </div>
+
+            <!-- Search Bar and Filters -->
+            <div class="search-filters">
+                <input type="text" id="searchInput" placeholder="Search by item name, location, etc.">
+                <div class="filters">
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option>Electronics</option>
+                        <option>Documents</option>
+                        <option>Clothing</option>
+                        <option>Accessories</option>
+                    </select>
+                    <select id="statusFilter">
+                        <option value="">All Statuses</option>
+                        <option>Lost</option>
+                        <option>Found</option>
+                    </select>
+                    <input type="date" id="dateFilter">
+                    <button class="action-btn">Apply Filters</button>
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div class="search-results">
+                <div class="result-item">
+                    <img src="./images/placeholder.jpg" alt="Item Image" class="item-thumbnail">
+                    <div class="item-info">
+                        <h3>Black Leather Wallet</h3>
+                        <p><strong>Location:</strong> Main Library</p>
+                        <p><strong>Date:</strong> 2023-12-01</p>
+                        <p><strong>Status:</strong> Lost</p>
+                        <button id = "View Details" class="action-btn">View Details</button>
+                    </div>
+                </div>
+                <!-- Add more result items as needed -->
+            </div>
+        </div>
+    </div>
+    <script src = "script.js"></script>
+</body>
+</html>

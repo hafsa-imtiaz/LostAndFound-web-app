@@ -1,0 +1,148 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background: #f0f0f0;
+  }
+  
+  /* Container: two panels side by side */
+  .container {
+    display: flex;
+    width: 900px;   /* adjust as needed */
+    height: 550px; /* adjust as needed */
+    margin: 4rem auto;
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  /* Left & Right panels each 50% */
+  .left-panel, 
+  .right-panel {
+    width: 50%;
+    position: relative;
+  }
+  
+  /* Left panel: put forms inside */
+  .left-panel {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* panel-form: a container for each form (login or signup) */
+  .panel-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .panel-form h2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* Make sign-up form container scrollable */
+  .scrollable {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* for smoother iOS scrolling */
+  }
+  
+  /* Right panel (blue side) */
+  .right-panel {
+    background: #0083b0;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  /* Toggle Buttons */
+  .toggle-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .toggle-btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Disabled button style (the active panel button) */
+  .toggle-btn:disabled {
+    background: #fff;
+    color: #0083b0;
+    cursor: not-allowed;
+  }
+  
+  /* Panel Image */
+  .panel-image {
+    max-width: 70%;
+    margin-top: 1rem;
+    border-radius: 6px;
+    border: 2px solid #fff;
+  }
+  
+  /* Form elements inside panel-form */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* space between label/input sets */
+  }
+  
+  label {
+    font-weight: 600;
+  }
+  
+  input,
+  select {
+    padding: 0.6rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  button[type="submit"] {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background: #0083b0;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background: #00b4db;
+  }
+  
+  .forgot {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+    text-align: left;
+  }
+  

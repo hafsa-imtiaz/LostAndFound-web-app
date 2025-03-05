@@ -1,0 +1,217 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 2rem;
+}
+
+.welcome-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #0083b0;
+    color: white;
+    padding: 2rem;
+    position: fixed;
+    height: 100%;
+    
+}
+
+.sidebar-header {
+    margin-bottom: 2rem;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-item {
+    background: #006a8d;
+    margin: 0rem 0;
+    padding: 0.8rem 2rem;
+    border-radius: 0;
+    cursor: pointer;
+    transition: 0.3s;
+    width: calc(100% + 4rem);
+    height: 4rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Profile Header Section */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+/* Profile Picture */
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    background: #0083b0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-btn {
+    display: block;
+    background: #006a8d;
+    color: white;
+    text-align: center;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.upload-btn:hover {
+    background: #005270;
+}
+
+/* Hide the default file input */
+#upload-photo {
+    display: none;
+}
+
+/* Profile Container */
+.profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Profile Form */
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 60%;
+}
+
+.profile-form label {
+    font-weight: bold;
+}
+
+.profile-form input,
+.profile-form select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Profile Picture */
+.profile-picture {
+    width: 200px; /* Increase size */
+    height: 200px; /* Increase size */
+    border-radius: 8px;
+    background: #b7e3f2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    margin-top: -80px; /* Adjust upwards */
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.upload-btn {
+    background: #006a8d;
+    color: white;
+    text-align: center;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    width: 100%;
+    text-align: center;
+}
+
+.upload-btn:hover {
+    background: #005270;
+}
+
+/* Hide the default file input */
+#upload-photo {
+    display: none;
+}
+
+/* Change Password Section */
+.change-password {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 2rem;
+}
+
+.change-password form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Save Button */
+.action-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background: #0083b0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 1rem;
+}
+
+.action-btn:hover {
+    background: #00b4db;
+}
