@@ -80,7 +80,7 @@ The backend is located in **`com.example.LostAndFound`**, which includes:
 
 3. Run the backend:
    - In **VS Code**, open the main class (`LostAndFoundApplication.java`).
-   - Click **Run** or execute:
+   - Click **Run** or execute this command in directory containing pom.xml:
      ```bash
      mvn spring-boot:run
      ```
