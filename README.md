@@ -84,6 +84,10 @@ The backend is located in **`com.example.LostAndFound`**, which includes:
      ```bash
      mvn spring-boot:run
      ```
+   - If you don't have MAVEN installed, or it gives an error, **Run** or execute:
+    ```bash
+    ./mvnw spring-boot:run 
+    ```
 4. The backend should now be running on `http://localhost:8080`.
 
 ---
@@ -98,8 +102,8 @@ The frontend is located in **`com.example.LostAndFound.resources.static`**, cont
 ### **Steps to Run the Frontend:**
 1. Open the **VS Code** project.
 2. Navigate to the `static` folder.
-3. Open `index.html`.
-4. Right-click and select **Open with Live Server**.
+3. Open `front.html`.
+4. Right-click and select **Open with Live Server** or open `http://localhost:8080/front.html` in your broswer.
 5. The frontend should now be running.
 
 ---
