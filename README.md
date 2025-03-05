@@ -53,7 +53,7 @@ Before running the project, install the following:
 3. Import the provided SQL file (`lostandfounddb_mysql`), which contains all required tables queries.
 4. Verify that the tables have been created:
    ```sql
-   USE lost_found_db;
+   USE LostandFoundDB;
    SHOW TABLES;
    ```
 
