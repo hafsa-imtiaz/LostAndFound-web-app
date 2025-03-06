@@ -70,3 +70,46 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+  document.getElementById("filterBtn").addEventListener("click", function() {
+    const searchQuery = document.getElementById("searchInput").value;
+    const category = document.getElementById("categoryFilter").value;
+    const status = document.getElementById("statusFilter").value;
+    const date = document.getElementById("dateFilter").value;
+
+    // Build the URL with query parameters
+    let url = '/search?';
+    if (searchQuery) url += `search=${searchQuery}&`;
+    if (category) url += `category=${category}&`;
+    if (status) url += `status=${status}&`;
+    if (date) url += `date=${date}&`;
+
+    // Remove the last '&' if any
+    url = url.endsWith('&') ? url.slice(0, -1) : url;
+
+    // Fetch data from backend based on filters
+    fetch(url)
+        .then(response => response.json())
+        .then(data => updateTable(data))
+        .catch(error => console.error('Error fetching search results:', error));
+});
+
+function updateTable(items) {
+    const tableBody = document.getElementById('searchTableBody');
+    tableBody.innerHTML = ''; // Clear existing table rows
+
+    // Populate the table with new rows based on the fetched data
+    items.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.id}</td>
+            <td>${item.name}</td>
+            <td>${item.type}</td>
+            <td>${item.status}</td>
+            <td>${item.description}</td>
+            <td>${item.location}</td>
+            <td>${item.dateReported}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
