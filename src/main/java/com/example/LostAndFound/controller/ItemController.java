@@ -1,10 +1,13 @@
 package com.example.LostAndFound.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.LostAndFound.entity.Item;
 import com.example.LostAndFound.entity.ItemStatus;
+import com.example.LostAndFound.repository.ItemRepository;
 import com.example.LostAndFound.service.ItemService;
 
 @RestController
@@ -24,6 +28,14 @@ public class ItemController {
     // Constructor injection
     public ItemController(ItemService itemService) {
         this.itemService = itemService;
+    }
+    
+    @Autowired
+    private ItemRepository itemRepository;
+
+    @GetMapping("/lost")
+    public List<Item> getLostItems() {
+        return itemRepository.findByStatus(ItemStatus.LOST);
     }
 
     // 1. Report item
@@ -51,6 +63,8 @@ public class ItemController {
                 default -> status = ItemStatus.LOST;
             }
             item.setStatus(status);
+
+
 
             // If you want to store date in dateReported, you can parse request.getDate() 
             //item.setDateReported(LocalDateTime.parse(request.getDate(), DateTimeFormatter.ISO_DATE)); 
