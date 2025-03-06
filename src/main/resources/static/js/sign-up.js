@@ -51,12 +51,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 const user = await response.json(); // Extract user data
                 console.log("yahan");
                 localStorage.setItem("loggedInUser", user.username); // Store logged-in user's username
-                window.location.href = "userhome.html"; // Redirect to user dashboard
+                localStorage.setItem("userType", user.userType);
+                if(user.userType === "Admin")
+                    window.location.href = "AdminPanel.html"; // Redirect to user dashboard
+                else
+                    window.location.href = "userhome.html"; userhome.html
             } else {
                 const errorData = await response.json();
                 loginError.textContent = errorData.message || "Log-In failed. Invalid Email or Password. Please try again.";
             }
         } catch (error) {
+            console.log(error);
             alert("Server error. Please try again later.");
         }
     });

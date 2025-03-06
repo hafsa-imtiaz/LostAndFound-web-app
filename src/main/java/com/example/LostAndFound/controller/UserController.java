@@ -19,7 +19,7 @@ import com.example.LostAndFound.dto.DashboardResponse;
 import com.example.LostAndFound.dto.LoginRequest;
 import com.example.LostAndFound.dto.PasswordChangeRequest;
 import com.example.LostAndFound.entity.User;
-import com.example.LostAndFound.repository.UserRepository;
+// import com.example.LostAndFound.repository.UserRepository;
 import com.example.LostAndFound.service.ItemService;
 import com.example.LostAndFound.service.UserService;
 
@@ -32,7 +32,7 @@ public class UserController {
 
     private final UserService userService;
     private ItemService itemService;
-    private UserRepository userRepository;
+    // private UserRepository userRepository;
 
     public UserController(UserService userService) {
         this.userService = userService;
