@@ -94,6 +94,10 @@ public class UserService {
         existingUser.setDate_of_birth(updatedUser.getDate_of_birth());
         existingUser.setGender(updatedUser.getGender());
 
+        if (updatedUser.getProfilePicture() != null && !updatedUser.getProfilePicture().isEmpty()) {
+            existingUser.setProfilePicture(updatedUser.getProfilePicture());  // Base64 string
+        }
+
         //System.out.println("Saving user: " + existingUser); // Debugging log
 
         // Step 5: Save the updated user to the database
@@ -124,5 +128,24 @@ public class UserService {
 
     public long count(){
         return userRepository.count();
+    }
+    
+    public boolean updateProfilePicture(String username, String encodedImage) {
+        try {
+            // Fetch the user by username
+            User user = userRepository.findByUsername(username)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            // Set the profile picture
+            user.setProfilePicture(encodedImage);
+
+            // Save the updated user entity
+            userRepository.save(user);
+
+            return true;
+        } catch (Exception e) {
+            System.out.println("\n\n\n\n\n" + e);
+            return false;
+        }
     }
 }

@@ -61,9 +61,8 @@ public class User {
     @Column(updatable = false)
     private Date createdAt = new Date();
 
-    @Lob // Marks profilePicture as a large object (LONGBLOB)
-    @Column(name = "profile_picture")
-    private byte[] profilePicture; 
+    @Lob // This annotation tells Hibernate to treat the field as a large object (LOB) for large data
+    private String profilePicture; // Store the Base64-encoded string
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_type")
