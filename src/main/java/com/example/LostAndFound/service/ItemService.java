@@ -1,11 +1,17 @@
 package com.example.LostAndFound.service;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import net.coobird.thumbnailator.Thumbnails;
+import java.io.ByteArrayOutputStream;
+import java.util.Base64;
 
 import com.example.LostAndFound.dto.DashboardResponse;
 import com.example.LostAndFound.dto.ItemDto;
@@ -69,4 +75,19 @@ public class ItemService {
 
         return dto;
     }
+
+    public static byte[] compressImage(String base64Image, int targetWidth, int targetHeight) throws IOException {
+        // Step 1: Decode the Base64 image string into a byte array
+        byte[] decodedImage = Base64.getDecoder().decode(base64Image);
+
+        // Step 2: Resize and compress the image using Thumbnailator
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        Thumbnails.of(new ByteArrayInputStream(decodedImage))
+                .size(targetWidth, targetHeight)  // Resize to target dimensions
+                .outputFormat("jpg")  // Compress to JPEG
+                .toOutputStream(byteArrayOutputStream);
+
+        return byteArrayOutputStream.toByteArray();
+    }
+    
 }

@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("yahan");
                 localStorage.setItem("loggedInUser", user.username); // Store logged-in user's username
                 localStorage.setItem("userType", user.userType);
+                localStorage.setItem("userId", user.userId);
                 if(user.userType === "Admin")
                     window.location.href = "AdminPanel.html"; // Redirect to user dashboard
                 else

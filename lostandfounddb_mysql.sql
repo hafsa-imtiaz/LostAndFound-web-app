@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS items (
   location VARCHAR(100),
   status ENUM('lost','found','claimed','returned') DEFAULT 'lost',
   date_reported TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  image_path VARCHAR(255),
+  item_image LONGBLOB,
 
   CONSTRAINT fk_item_user
     FOREIGN KEY (user_id) REFERENCES users(user_id)
@@ -111,7 +111,7 @@ VALUES ('Admin', 'User', 'adminprofile', 'admin@lostandfound.com', '$2a$10$fRW2r
 -- PASSWORD: admin123
 
 SELECT * FROM USERS;
-
+SELECT * FROM ITEMS;
 INSERT INTO items (
   user_id,
   item_name,
@@ -119,7 +119,7 @@ INSERT INTO items (
   description,
   location,
   status,
-  image_path
+  item_image
 ) VALUES
 (2, 'Black Leather Wallet', 'Accessories', 'Leather wallet with some cards inside', 'Cafeteria', 'lost', 'images/wallet.jpg'),
 (2, 'Red Backpack', 'Clothing', 'Medium-sized bag with school books', 'Library', 'found', 'images/backpack.png'),

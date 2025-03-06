@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -39,11 +40,12 @@ public class Item {
     @Column(columnDefinition = "enum('lost','found','claimed','returned') default 'lost'")
     private ItemStatus status;  // Java enum
 
-    @Column(name = "date_reported")
+    @Column(name = "date_reported", updatable = false, insertable = false)
     private LocalDateTime dateReported = LocalDateTime.now();
 
-    @Column(name = "image_path")
-    private String imagePath;
+    @Lob
+    @Column(name = "item_image")
+    private byte[] itemImage; 
 
     // Constructors
     public Item() {
@@ -98,10 +100,26 @@ public class Item {
     public void setDateReported(LocalDateTime dateReported) {
         this.dateReported = dateReported;
     }
-    public String getImagePath() {
-        return imagePath;
+    public byte[] getItemImage() {
+        return itemImage;
     }
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setItemImage(byte[] itemImage) {
+        this.itemImage = itemImage;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+            "itemId=" + itemId +
+            ", userId=" + userId +
+            ", itemName='" + itemName + '\'' +
+            ", itemType='" + itemType + '\'' +
+            ", description='" + description + '\'' +
+            ", location='" + location + '\'' +
+            ", status=" + status +
+            ", dateReported=" + dateReported +
+            ", itemImage=" + (itemImage != null ? "[binary data]" : "null") +
+            '}';
+    }
+
 }
