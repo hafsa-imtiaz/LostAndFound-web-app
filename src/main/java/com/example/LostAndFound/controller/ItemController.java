@@ -34,21 +34,35 @@ public class ItemController {
     @Autowired
     private ItemRepository itemRepository;
 
-    @GetMapping("/lost")
-    public List<LostItemView> getLostItems() {
-    return itemRepository.findLostItemsWithUsernames();
+    @GetMapping("/lost-old")
+    public List<Item> getLostItemsOld() {
+    return itemRepository.findByStatus(ItemStatus.claimed);
     }
 
-    @GetMapping("/claimed")  // e.g. returns all 'lost' items
-    public List<Item> getClaimedItems() { 
+    @GetMapping("/lost")
+    public List<LostItemView> getLostItems() {
+    return itemRepository.findItemsWithUsernameByStatus("lost");
+    }
+
+    @GetMapping("/claimed-old")  
+    public List<Item> getClaimedItemsOld() { 
         return itemRepository.findByStatus(ItemStatus.claimed); 
     }
 
-    @GetMapping("/found")  // e.g. returns all 'lost' items
-    public List<Item> getFoundItems() { 
+    @GetMapping("/claimed")  
+    public List<LostItemView> getClaimedItems() { 
+        return itemRepository.findItemsWithUsernameByStatus("claimed"); 
+    }
+
+    @GetMapping("/found-old")  
+    public List<Item> getFoundItemsOld() { 
         return itemRepository.findByStatus(ItemStatus.found); 
     }
     
+    @GetMapping("/found")  
+    public List<LostItemView> getFoundItems() { 
+        return itemRepository.findItemsWithUsernameByStatus("found"); 
+    }
     // Or a simple getAll if you prefer:
     @GetMapping("/all")
     public List<Item> getAllItems() {

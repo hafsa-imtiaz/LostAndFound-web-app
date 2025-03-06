@@ -3,6 +3,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.LostAndFound.dto.LostItemView;
@@ -12,20 +13,20 @@ import com.example.LostAndFound.entity.ItemStatus;;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
         @Query(value = """
-        SELECT i.item_id as itemId,
-               i.item_name as itemName,
-               i.item_type as itemType,
-               i.description as description,
-               i.location as location,
-               i.date_reported as dateReported,
-               i.status as status,
-               i.image_path as imagePath,
-               u.username as username
+        SELECT i.item_id AS itemId,
+               i.item_name AS itemName,
+               i.item_type AS itemType,
+               i.description AS description,
+               i.location AS location,
+               i.date_reported AS dateReported,
+               i.status AS status,
+               i.image_path AS imagePath,
+               u.username AS username
         FROM items i
         JOIN users u ON i.user_id = u.user_id
-        WHERE i.status = 'lost'
+        WHERE i.status = :status
     """, nativeQuery = true)
-    List<LostItemView> findLostItemsWithUsernames();
+    List<LostItemView> findItemsWithUsernameByStatus(@Param("status") String status);
 
         long countByUserIdAndStatus(Long userId, ItemStatus status);
         // Return top 5 by dateReported desc
