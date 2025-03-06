@@ -5,12 +5,12 @@
     font-family: 'Arial', sans-serif;
 }
 
-
 /* Main Content */
 .main-content {
     flex: 1;
     margin-left: 250px;
     padding: 2rem;
+    transition: margin-left 0.3s ease-in-out;
 }
 
 .welcome-section {
@@ -29,6 +29,7 @@
     padding: 2rem;
     position: fixed;
     height: 100%;
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out, position 0.3s ease-in-out;
 }
 
 .sidebar-header {
@@ -37,7 +38,7 @@
 
 .sidebar-nav {
     list-style: none;
-    padding: 0; /* Remove default padding */
+    padding: 0;
 }
 
 .nav-item {
@@ -57,9 +58,7 @@
     background: rgba(255, 255, 255, 0.1);
 }
 
-
 /* Report Item Page */
-
 .report-form {
     background: white;
     padding: 2rem;
@@ -120,4 +119,51 @@
 
 .report-form .action-btn:hover {
     background: #00b4db;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    /* Sidebar becomes horizontal below the header */
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    /* Sidebar becomes a horizontal bar */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Sidebar navigation aligns items horizontally */
+    .sidebar-nav {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Navigation items are evenly spaced and centered */
+    .nav-item {
+        flex: 1;
+        text-align: center;
+        padding: 0.8rem;
+        font-size: 0.9rem;
+        background: none; /* Removes background color */
+        border-radius: 0;
+        height: auto;
+        margin: 0 5px;
+    }
+
+    /* Adjust main content to remove margin-left */
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
 }

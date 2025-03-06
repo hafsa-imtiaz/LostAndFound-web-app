@@ -19,16 +19,13 @@
     padding: 2rem;
     position: fixed;
     height: 100%;
-    transition: 0.3s ease-in-out;
 }
 
-.sidebar-header {
-    margin-bottom: 2rem;
-}
-
+/* Sidebar Navigation */
 .sidebar-nav {
     list-style: none;
     padding: 0;
+    margin: 30px 0px 0px;
 }
 
 .nav-item {
@@ -42,22 +39,22 @@
     height: 4rem;
     margin-left: -2rem;
     margin-right: -2rem;
-    font-size: 1rem;
 }
 
 .nav-item:hover {
     background: rgba(255, 255, 255, 0.1);
 }
 
+
 /* Main Content */
 .main-content {
     flex: 1;
     margin-left: 250px;
     padding: 2rem;
-    transition: 0.3s ease-in-out;
 }
 
-.welcome-section {
+/* Help Header */
+.help-header {
     background: white;
     padding: 2rem;
     border-radius: 8px;
@@ -65,72 +62,81 @@
     margin-bottom: 2rem;
 }
 
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.stat-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 2.5rem;
+.help-header h1 {
     color: #0083b0;
-    font-weight: bold;
     margin-bottom: 0.5rem;
 }
 
-.quick-actions {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin: 2rem 0;
-}
-
-.action-btn {
-    padding: 1.5rem;
-    background: #0083b0;
-    color: white;
-    border: none;
+/* FAQ Section */
+.faq-section {
+    background: white;
+    padding: 2rem;
     border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
 }
 
-.action-btn:hover {
-    background: #00b4db;
+.faq-item {
+    margin-bottom: 1.5rem;
 }
 
-.recent-activity {
+.faq-item h3 {
+    color: #006a8d;
+    margin-bottom: 0.5rem;
+}
+
+.faq-item p {
+    color: #555;
+}
+
+/* Contact Support */
+.contact-support {
     background: white;
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.activity-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
+.contact-support form {
+    display: flex;
+    flex-direction: column;
 }
 
-.activity-table th,
-.activity-table td {
+.contact-support label {
+    margin: 0.5rem 0;
+    font-weight: bold;
+}
+
+.contact-support input,
+.contact-support textarea {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.contact-support textarea {
+    height: 120px;
+    resize: none;
+}
+
+.contact-support button {
     padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid #eee;
+    background: #0083b0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
+.contact-support button:hover {
+    background: #00b4db;
+}
+
+@media (max-width: 768px) {
     .dashboard-container {
         flex-direction: column;
     }
@@ -168,17 +174,10 @@
         margin: 0 5px;
     }
 
+    /* Main content takes full width */
     .main-content {
         margin-left: 0;
         padding: 1rem;
     }
-
-    .stats-grid {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 1rem;
-    }
-
-    .quick-actions {
-        grid-template-columns: repeat(1, 1fr);
-    }
 }
+

@@ -5,20 +5,10 @@
     font-family: 'Arial', sans-serif;
 }
 
-
-/* Main Content */
-.main-content {
-    flex: 1;
-    margin-left: 250px;
-    padding: 2rem;
-}
-
-.welcome-section {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
+/* Dashboard Container */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
 }
 
 /* Sidebar */
@@ -37,12 +27,12 @@
 
 .sidebar-nav {
     list-style: none;
-    padding: 0; /* Remove default padding */
+    padding: 0;
 }
 
 .nav-item {
     background: #006a8d;
-    margin: 0rem 0;
+    margin: 0;
     padding: 0.8rem 2rem;
     border-radius: 0;
     cursor: pointer;
@@ -57,10 +47,22 @@
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* ==================== */
-/* Search & Browse Page */
-/* ==================== */
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 2rem;
+}
 
+.welcome-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+/* Search & Filters */
 .search-filters {
     background: white;
     padding: 2rem;
@@ -171,4 +173,69 @@
 
 .result-item .action-btn:hover {
     background: #00b4db;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    /* Sidebar becomes horizontal below the header */
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    /* Sidebar becomes a horizontal bar */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Sidebar navigation aligns items horizontally */
+    .sidebar-nav {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Navigation items are evenly spaced and centered */
+    .nav-item {
+        flex: 1;
+        text-align: center;
+        padding: 0.8rem;
+        font-size: 0.9rem;
+        background: none;
+        border-radius: 0;
+        height: auto;
+        margin: 0 5px;
+    }
+
+    /* Adjust main content margin */
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    /* Stack filters for better readability */
+    .search-filters .filters {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    /* Adjust result items for smaller screens */
+    .result-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .result-item .item-thumbnail {
+        width: 100%;
+        height: auto;
+    }
 }

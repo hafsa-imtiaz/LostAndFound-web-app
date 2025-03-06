@@ -3,6 +3,7 @@ package com.example.LostAndFound.controller;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -147,6 +148,11 @@ public class UserController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
+    }
+
+    @GetMapping
+    public List<User> getUsers() {
+        return userService.getAllUsers();
     }
 
 }
