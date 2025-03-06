@@ -1,19 +1,17 @@
 package com.example.LostAndFound.service;
 
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.time.LocalDate;
-import java.io.IOException;
 import java.io.ByteArrayInputStream;
-
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Base64;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import net.coobird.thumbnailator.Thumbnails;
-import java.io.ByteArrayOutputStream;
-import java.util.Base64;
 
 import com.example.LostAndFound.dto.DashboardResponse;
 import com.example.LostAndFound.dto.ItemDto;
@@ -22,6 +20,8 @@ import com.example.LostAndFound.entity.ItemStatus;
 import com.example.LostAndFound.entity.User;
 import com.example.LostAndFound.repository.ItemRepository;
 import com.example.LostAndFound.repository.UserRepository;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 @Service
 public class ItemService {
@@ -108,4 +108,17 @@ public class ItemService {
         return byteArrayOutputStream.toByteArray();
     }
     
+    public boolean claimItem(Long itemId) {
+        Optional<Item> optionalItem = itemRepository.findById(itemId);
+        if (optionalItem.isPresent()) {
+            Item item = optionalItem.get();
+            if (item.getStatus() == ItemStatus.lost) { // Only allow claiming lost items
+                item.setStatus(ItemStatus.claimed); // Update status
+                itemRepository.save(item);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

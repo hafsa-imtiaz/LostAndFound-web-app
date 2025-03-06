@@ -38,3 +38,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
   
+  document.addEventListener("DOMContentLoaded", function () {
+    const claimButton = document.querySelector(".action-btn");
+
+    claimButton.addEventListener("click", function () {
+        const itemId = 1; // Replace with actual item ID dynamically
+
+        fetch(`/api/items/${itemId}/claim`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Item claim failed");
+            }
+            return response.text();
+        })
+        .then(data => {
+            alert(data); // Show success message
+            claimButton.textContent = "Claimed";
+            claimButton.disabled = true;
+        })
+        .catch(error => {
+            alert("Error: " + error.message);
+        });
+    });
+});

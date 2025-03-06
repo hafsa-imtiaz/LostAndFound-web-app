@@ -1,17 +1,18 @@
 package com.example.LostAndFound.controller;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.format.annotation.*;
-import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -93,6 +94,18 @@ public class ItemController {
         }
         return ResponseEntity.ok(item);
     }
+    
+    
+    @PutMapping("/{id}/claim")
+    public ResponseEntity<String> claimItem(@PathVariable Long id) {
+        boolean success = itemService.claimItem(id);
+        if (success) {
+            return ResponseEntity.ok("Item claimed successfully!");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Item not found or already claimed.");
+        }
+    }
+
 
     @PostMapping("/report")
     public ResponseEntity<?> reportItem(@RequestBody ReportItemRequest request) {
