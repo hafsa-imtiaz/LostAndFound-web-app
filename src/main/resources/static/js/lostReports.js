@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // data should be an array of lost items
         console.log("Lost Items:", data);
         const tableBody = document.getElementById("lostReportsTableBody");
-        tableBody.innerHTML = ""; // Clear any existing rows (just in case)
+        tableBody.innerHTML = ""; 
   
         data.forEach(item => {
           const row = document.createElement("tr");
