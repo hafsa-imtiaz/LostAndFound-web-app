@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.LostAndFound.dto.LostItemView;
 import com.example.LostAndFound.entity.Item;
 import com.example.LostAndFound.entity.ItemStatus;
 import com.example.LostAndFound.repository.ItemRepository;
@@ -33,10 +34,11 @@ public class ItemController {
     @Autowired
     private ItemRepository itemRepository;
 
-    @GetMapping("/lost")  // e.g. returns all 'lost' items
-    public List<Item> getLostItems() { 
-        return itemRepository.findByStatus(ItemStatus.lost); 
+    @GetMapping("/lost")
+    public List<LostItemView> getLostItems() {
+    return itemRepository.findLostItemsWithUsernames();
     }
+
     
     // Or a simple getAll if you prefer:
     @GetMapping("/all")

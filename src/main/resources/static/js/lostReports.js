@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               <td>${item.description || "No description"}</td> <!-- Handle null values -->
               <td>${item.location || "Unknown"}</td>           <!-- Handle null values -->
               <td>${new Date(item.dateReported).toLocaleDateString()}</td>
-              <td>${item.userId}</td>
+              <td>${item.username || "No user"}</td>
           `;
           tableBody.appendChild(row);
       });
