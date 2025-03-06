@@ -90,7 +90,7 @@ public class UserController {
     @GetMapping("/{username}")
     public ResponseEntity<?> getUserProfile(@PathVariable String username) {
         Optional<User> user = userService.getUserByUsername(username);
-
+        System.out.println(user.toString());
         if (user.isPresent()) {
             return ResponseEntity.ok(user.get());
         } else {

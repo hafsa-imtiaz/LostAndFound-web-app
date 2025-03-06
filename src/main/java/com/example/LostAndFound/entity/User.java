@@ -7,6 +7,8 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.Date;
 
+// import org.hibernate.usertype.UserType;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -59,8 +61,20 @@ public class User {
     @Column(updatable = false)
     private Date createdAt = new Date();
 
+    @Lob // Marks profilePicture as a large object (LONGBLOB)
+    @Column(name = "profile_picture")
+    private byte[] profilePicture; 
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_type")
+    private UserType userType = UserType.User; // Default is "User"
+
     public enum Gender {
         Male, Female, Other
+    }
+
+    public enum UserType {
+        User, Admin
     }
 
     public String getUsername() {
@@ -80,6 +94,7 @@ public class User {
             ", email='" + email + '\'' +
             ", date_of_birth=" + date_of_birth +
             ", gender=" + gender +
+            ", userType=" + userType +
             ", createdAt=" + createdAt +
             '}';
     }

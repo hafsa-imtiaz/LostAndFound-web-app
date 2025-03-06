@@ -13,13 +13,20 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("username").value = user.username || "";
             document.getElementById("email").value = user.email || "";
             document.getElementById("gender").value = user.gender || "";
-            document.getElementById("dob").value = user.date_of_birth || "";
+            document.getElementById("dob").value = user.dateOfBirth || "";
+            console.log("Received date_of_birth:", user.dateOfBirth);
+            console.log("Received date_of_birth:", document.getElementById("dob").value);
         })
         .catch(error => {
             console.error("Error fetching user data:", error);
             alert("Failed to load user data.");
         });
 });
+
+document.getElementById("logout").addEventListener("click", () => {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "signup.html";
+  });
 
 // Handle profile update
 document.querySelector(".profile-form").addEventListener("submit", function (event) {
@@ -38,7 +45,7 @@ document.querySelector(".profile-form").addEventListener("submit", function (eve
         return;
     }
 
-    const updatedUser = { firstName, lastName, username, email, gender, dateOfBirth };
+    const updatedUser = { firstName, lastName, username, email, gender, dateOfBirth };    
 
     fetch(`http://localhost:8080/api/users/${currusername}`, {
         method: "PUT",
