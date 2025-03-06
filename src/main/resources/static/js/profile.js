@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const username =  localStorage.getItem("loggedInUser"); // Replace with dynamic username
+    const username = localStorage.getItem("loggedInUser"); // Replace with dynamic username
 
     fetch(`http://localhost:8080/api/users/${username}`)
         .then(response => {
@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
         })
         .then(user => {
-            document.getElementById("fullName").value = user.firstName + " " + user.lastName;
-            document.getElementById("username").value = user.username;
-            document.getElementById("email").value = user.email;
-            document.getElementById("gender").value = user.gender;
+            document.getElementById("fullName").value = (user.firstName || "") + " " + (user.lastName || "");
+            document.getElementById("username").value = user.username || "";
+            document.getElementById("email").value = user.email || "";
+            document.getElementById("gender").value = user.gender || "";
             document.getElementById("dob").value = user.date_of_birth || "";
         })
         .catch(error => {
@@ -24,27 +24,84 @@ document.addEventListener("DOMContentLoaded", function () {
 // Handle profile update
 document.querySelector(".profile-form").addEventListener("submit", function (event) {
     event.preventDefault();
+    const currusername = localStorage.getItem("loggedInUser");
+    const fullNameParts = document.getElementById("fullName").value.trim().split(" ");
+    const firstName = fullNameParts[0] ? fullNameParts[0] : "";
+    const lastName = fullNameParts.length > 1 ? fullNameParts.slice(1).join(" ") : "";
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const gender = document.getElementById("gender").value.trim();
+    const dateOfBirth = document.getElementById("dob").value.trim();
 
-    const updatedUser = {
-        firstName: document.getElementById("fullName").value.split(" ")[0],
-        lastName: document.getElementById("fullName").value.split(" ")[1] || "",
-        username: document.getElementById("username").value,
-        email: document.getElementById("email").value,
-        gender: document.getElementById("gender").value,
-        dateOfBirth: document.getElementById("dob").value
-    };
+    if (!firstName || !lastName || !username || !email || !gender || !dateOfBirth) {
+        alert("All fields are required. Please fill in the missing information.");
+        return;
+    }
 
-    fetch(`http://localhost:8080/api/users/${updatedUser.username}`, {
+    const updatedUser = { firstName, lastName, username, email, gender, dateOfBirth };
+
+    fetch(`http://localhost:8080/api/users/${currusername}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedUser)
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errMessage => { throw new Error(errMessage); });
+        }
+        return response.json();
+    })
     .then(data => {
         alert("Profile updated successfully!");
     })
     .catch(error => {
         console.error("Error updating profile:", error);
-        alert("Failed to update profile.");
+        alert("Failed to update profile: " + error.message);
+    });
+});
+
+document.querySelector(".change-password form").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent page reload
+
+    const currentPassword = document.getElementById("currentPassword").value.trim();
+    const newPassword = document.getElementById("newPassword").value.trim();
+    const confirmPassword = document.getElementById("confirmPassword").value.trim();
+    const username = localStorage.getItem("loggedInUser"); // Assuming username is stored on login
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+        alert("All fields are required.");
+        return;
+    }
+
+    if (newPassword.length < 6) {
+        alert("New password must be at least 6 characters long.");
+        return;
+    }
+
+    if (newPassword !== confirmPassword) {
+        alert("New password and confirmation do not match.");
+        return;
+    }
+
+    const payload = { currentPassword, newPassword };
+
+    fetch(`http://localhost:8080/api/users/${username}/change-password`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errMessage => { throw new Error(errMessage); });
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert("Password updated successfully!");
+        document.querySelector(".change-password form").reset();
+    })
+    .catch(error => {
+        console.error("Error updating password:", error);
+        alert("Failed to update password: " + error.message);
     });
 });

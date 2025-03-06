@@ -1,4 +1,4 @@
-package com.example.LostAndFound.dto;  // Change this package name based on your project
+package com.example.LostAndFound.dto;  
 
 public class LoginRequest {
     private String email;
