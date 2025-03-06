@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS categories (
 CREATE TABLE IF NOT EXISTS items (
   item_id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,              -- user who posted the item
-  --category_id INT NULL,              -- optional category reference
+  -- category_id INT NULL,              -- optional category reference
   item_name VARCHAR(100) NOT NULL,
   item_type VARCHAR(100) NOT NULL,
   description TEXT,
@@ -35,9 +35,9 @@ CREATE TABLE IF NOT EXISTS items (
   CONSTRAINT fk_item_user
     FOREIGN KEY (user_id) REFERENCES users(user_id)
     ON DELETE CASCADE
-    ON UPDATE CASCADE,
+    ON UPDATE CASCADE
 
-  --CONSTRAINT fk_item_category
+   -- CONSTRAINT fk_item_category
    -- FOREIGN KEY (category_id) REFERENCES categories(category_id)
    -- ON DELETE SET NULL
    -- ON UPDATE CASCADE
