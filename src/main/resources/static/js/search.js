@@ -20,13 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const status = statusFilter.value;
       const date = dateFilter.value;
   
-      let url = "http://localhost:8080/api/items/search?";
-      const params = [];
-      if (searchVal) params.push(`q=${encodeURIComponent(searchVal)}`);
-      if (category) params.push(`category=${encodeURIComponent(category)}`);
-      if (status) params.push(`status=${encodeURIComponent(status)}`);
-      if (date) params.push(`date=${encodeURIComponent(date)}`);
-      url += params.join("&");
+      let url = "http://localhost:8080/api/items/all";
   
       try {
         const response = await fetch(url);
