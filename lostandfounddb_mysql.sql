@@ -111,3 +111,17 @@ VALUES ('Admin', 'User', 'adminprofile', 'admin@lostandfound.com', '$2a$10$fRW2r
 -- PASSWORD: admin123
 
 SELECT * FROM USERS;
+
+INSERT INTO items (
+  user_id,
+  item_name,
+  item_type,
+  description,
+  location,
+  status,
+  image_path
+) VALUES
+(2, 'Black Leather Wallet', 'Accessories', 'Leather wallet with some cards inside', 'Cafeteria', 'lost', 'images/wallet.jpg'),
+(2, 'Red Backpack', 'Clothing', 'Medium-sized bag with school books', 'Library', 'found', 'images/backpack.png'),
+(2, 'Student ID Card', 'Documents', 'University ID with name on it', 'Auditorium', 'claimed', NULL),
+(2, 'Laptop Charger', 'Electronics', 'Dell charger left near desk', 'Computer Lab', 'found', 'images/charger.jpg');

@@ -35,7 +35,7 @@ public class ItemController {
 
     @GetMapping("/lost")  // e.g. returns all 'lost' items
     public List<Item> getLostItems() { 
-        return itemRepository.findByStatus("lost"); 
+        return itemRepository.findByStatus(ItemStatus.lost); 
     }
     
     // Or a simple getAll if you prefer:

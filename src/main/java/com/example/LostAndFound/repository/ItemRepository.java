@@ -9,12 +9,9 @@ import com.example.LostAndFound.entity.ItemStatus;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
-
-
         long countByUserIdAndStatus(Long userId, ItemStatus status);
-
         // Return top 5 by dateReported desc
         List<Item> findTop5ByUserIdOrderByDateReportedDesc(Long userId);
-        List<Item> findByStatus(String status);
+        List<Item> findByStatus(ItemStatus status);
 
 }
