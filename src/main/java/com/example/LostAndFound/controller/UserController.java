@@ -1,9 +1,7 @@
 package com.example.LostAndFound.controller;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
-import java.util.List;
+import java.io.IOException;
+import java.util.*;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.LostAndFound.dto.DashboardResponse;
 import com.example.LostAndFound.dto.LoginRequest;
@@ -161,4 +161,29 @@ public class UserController {
         return ResponseEntity.ok(count);
     }
 
+    @PostMapping("/update-profile-picture")
+    public ResponseEntity<String> updateProfilePicture(
+            @RequestParam("file") MultipartFile file, 
+            @RequestParam("username") String username) {
+
+        if (file.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("No file selected");
+        }
+
+        try {
+            byte[] bytes = file.getBytes();
+            String encodedImage = Base64.getEncoder().encodeToString(bytes);
+
+            boolean isUpdated = userService.updateProfilePicture(username, encodedImage);
+            if (isUpdated) {
+                return ResponseEntity.ok("Profile picture updated successfully");
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update profile picture");
+            }
+
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing file");
+        }
+    }
 }

@@ -1,13 +1,10 @@
 package com.example.LostAndFound.controller;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -95,22 +92,27 @@ public class ItemController {
         return ResponseEntity.ok(item);
     }
 
-    // 1. Report item
     @PostMapping("/report")
     public ResponseEntity<?> reportItem(@RequestBody ReportItemRequest request) {
         try {
             // Create a new Item entity
             Item item = new Item();
-
-            // Hard-coded user ID for example; in real code, get from auth or pass from frontend
-            item.setUserId(1L);
-
-            // Map fields
+    
+            // Retrieve userId from the request
+            Long userId = request.getUserId();
+            if (userId == null) {
+                throw new IllegalArgumentException("User ID is required");
+            }
+    
+            // Set the userId
+            item.setUserId(userId);
+    
+            // Map other fields
             item.setItemName(request.getItemName());
             item.setItemType(request.getItemType());
             item.setDescription(request.getDescription());
             item.setLocation(request.getLocation());
-            
+    
             // Convert string to enum, default to LOST if unknown
             ItemStatus status;
             switch (request.getStatus().toLowerCase()) {
@@ -120,33 +122,31 @@ public class ItemController {
                 default -> status = ItemStatus.lost;
             }
             item.setStatus(status);
-
-
-
-            // If you want to store date in dateReported, you can parse request.getDate() 
-            //item.setDateReported(LocalDateTime.parse(request.getDate(), DateTimeFormatter.ISO_DATE)); 
-            // Or just rely on default timestamp
-
-            // For the image, store the filename or path
-            item.setImagePath(request.getImage());
-
+    
+            // Decode base64 image and set it as BLOB
+            if (request.getImageBase64() != null && !request.getImageBase64().isEmpty()) {
+                byte[] imageBytes = ItemService.compressImage(request.getImageBase64(), 600, 600);
+                item.setItemImage(imageBytes);
+            }
+    
             // 2. Save via service
             Item savedItem = itemService.saveItem(item);
-
+            System.out.println("\n\n\n\nn\n\n\n\n\nn\n\n\n\n\n" + savedItem.toString());
+    
             // 3. Send response
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Item reported successfully!");
             response.put("item", savedItem);
             return ResponseEntity.ok(response);
-
+    
         } catch (Exception e) {
             Map<String, String> errorMap = new HashMap<>();
             errorMap.put("message", "Failed to report item: " + e.getMessage());
             return ResponseEntity.badRequest().body(errorMap);
         }
     }
-    
 }
+
 
 class ReportItemRequest {
     private String itemType;     // "lost" / "found"
@@ -155,7 +155,12 @@ class ReportItemRequest {
     private String description;
     private String location;
     private String date;         // "yyyy-mm-dd"
-    private String image;        // filename or path
+    private String imageBase64;        // filename or path
+    private long userId;
+
+    public long getUserId(){
+        return userId;
+    }
 
     // Getters and setters
     public String getItemType() { return itemType; }
@@ -176,6 +181,6 @@ class ReportItemRequest {
     public String getDate() { return date; }
     public void setDate(String date) { this.date = date; }
 
-    public String getImage() { return image; }
-    public void setImage(String image) { this.image = image; }
+    public String getImageBase64() { return imageBase64; }
+    public void setImageBase64(String image) { this.imageBase64 = image; }
 }

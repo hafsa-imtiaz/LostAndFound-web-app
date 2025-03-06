@@ -93,27 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
-
-    // 2. Profile Picture Upload Feature
-
-    const uploadInput = document.getElementById("upload-photo");
-    const profileImage = document.getElementById("profile-img");
-
-    if (uploadInput && profileImage) {
-        uploadInput.addEventListener("change", (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    profileImage.src = e.target.result;
-                    alert("Profile picture updated successfully!");
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
-
 });
 
 document.getElementById("logout").addEventListener("click", () => {

@@ -1,10 +1,16 @@
-// report.js
 document.addEventListener("DOMContentLoaded", () => {
   const reportForm = document.getElementById("reportItemForm");
   if (!reportForm) return;
 
   reportForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    // Retrieve userId from localStorage
+    const userId = localStorage.getItem("userId");  // Assuming userId is stored in localStorage under 'userId'
+    if (!userId) {
+      alert("User not authenticated. Please log in.");
+      return;
+    }
 
     // 1. Gather form data
     const statusValue   = document.getElementById("statusSelect").value;   // "lost"/"found"/"claimed"/"returned"
@@ -14,24 +20,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const location      = document.getElementById("location")?.value || "";
     const date          = document.getElementById("date")?.value || "";
     
-    let imageFileName   = "";
+    let imageBase64 = ""; // Variable to store the base64 string
     const fileInput = document.getElementById("itemImage");
     if (fileInput && fileInput.files[0]) {
-      imageFileName = fileInput.files[0].name; // Storing the file name (not a real file upload)
+      const file = fileInput.files[0]; // Storing the file name (not a real file upload)
+      imageBase64 = await convertImageToBase64(file);  // Get the base64 string
     }
 
-    // 2. Build JSON
-    // We'll pass two separate fields:
-    //  - 'status' or 'category' for the ID or name referencing the categories table
-    //  - 'itemType' for electronics, clothing, etc.
+    // 2. Build JSON - include userId along with other fields
     const requestBody = {
+      userId,            // Add userId here
       status: statusValue,
       itemName,
       itemType: itemTypeValue,
       description,
       location,
       date,
-      imageFileName
+      imageBase64        // Sending base64 encoded image here
     };
 
     try {
@@ -64,3 +69,12 @@ document.getElementById("logout").addEventListener("click", () => {
   localStorage.removeItem("loggedInUser");
   window.location.href = "signup.html";
 });
+
+function convertImageToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result.split(',')[1]); // Extract the base64 string
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
