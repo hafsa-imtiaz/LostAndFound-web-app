@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center | Lost & Found</title>
+    <link rel="stylesheet" href="./css/helpCenter.css">
+</head>
+<body>
+    <div class="dashboard-container">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Lost & Found System</h2>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="nav-item">Home</li>
+                <li class="nav-item">Report Items</li>
+                <li class="nav-item">Search Items</li>
+                <li class="nav-item">Profile Settings</li>
+                <li class="nav-item">Help Center</li>
+                <li id="logout" class="nav-item">Log Out</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="help-header">
+                <h1>Help Center</h1>
+                <p>Find answers to your questions or contact support.</p>
+            </div>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq">
+                    <div class="faq-item">
+                        <h3>How do I report a lost item?</h3>
+                        <p>Go to the "Report Items" page and fill out the form with details of the lost item.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How do I report a found item?</h3>
+                        <p>Navigate to the "Report Items" page, select 'Found', and submit the necessary details.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>What happens after I report an item?</h3>
+                        <p>Your report will be logged in the system. Other users can search for items and claim them.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How can I claim a lost item?</h3>
+                        <p>Search for your item using keywords and follow the claim process.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Support Form -->
+            <div class="contact-support">
+                <h2>Contact Support</h2>
+                <form>
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Describe your issue" required></textarea>
+
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src = "./js/script.js"></script>
+</body>
+</html>

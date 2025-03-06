@@ -69,16 +69,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     window.location.href = "UserHome.html";
                     break;
                 case "Report Items":
-                    window.location.href = "Reports.html";
+                    window.location.href = "ReportItem.html";
                     break;
                 case "Search Items":
-                    window.location.href = "search.html";
+                    window.location.href = "SearchItem.html";
                     break;
                 case "Profile Settings":
                     window.location.href = "Profile.html";
                     break;
                 case "Help Center":
-                    alert("Redirecting to Help Center (Not implemented yet)");
+                    window.location.href = "HelpCenter.html";
                     break;
                 default:
                     console.warn("Navigation not found:", page);
