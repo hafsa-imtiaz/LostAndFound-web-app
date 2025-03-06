@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel | Lost & Found</title>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="./css/adminPanel.css" />
+</head>
+<body>
+
+   <div class="sidebar">
+    <div class="sidebar-header">
+        <h2>Lost & Found System</h2>
+    </div>
+    <div>
+    <ul class="sidebar-nav">
+        <li id="Home" class="nav-item">Home</li>
+        <li id="viewLostReports" class="nav-item">View Lost Reports</li>
+        <li id="viewFoundReports" class="nav-item">View Found Reports</li>
+        <li id="viewClaimedReports" class="nav-item">View Claimed Reports</li>
+        <li id="viewUsers" class="nav-item">View Users</li>
+        <li id="profileSettings" class="nav-item">Profile Settings</li>
+        <li id="logout" class="nav-item">Logout</li>
+    </ul>
+   </div>
+   </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Welcome/Admin Info -->
+    <div class="welcome-section">
+      <h1>Welcome, Admin</h1>
+      <p>Manage all users and reports here.</p>
+    </div>
+
+    <!-- Reports Section -->
+    <div class="reports-section">
+      <h2>All Reports</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Report ID</th>
+            <th>Item Name</th>
+            <th>Type</th>
+            <th>Date Reported</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="reportsTableBody">
+          <!-- Rows populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Link to external JS at the bottom -->
+  <script src="./js/adminPanel.js"></script>
+</body>
+</html>

@@ -51,9 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (messageUserBtn) {
         // Replace these with dynamic data from your backend :)
-        const userEmail = "aounjee975@gmail.com"; // User's email
+        const userEmail = "jack@gmail.com"; // User's email
         const itemName = "Black Leather Wallet"; // Item name
-        const userName = "Aoun Jee"; // User's name
+        const userName = "Jack Paul"; // User's name
 
         // Construct the Gmail URL
         const subject = `Regarding Your Lost Item: ${itemName}`;

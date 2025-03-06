@@ -1,18 +1,29 @@
 package com.example.LostAndFound.controller;
 
-import com.example.LostAndFound.entity.User;
-import com.example.LostAndFound.service.UserService;
-import com.example.LostAndFound.dto.LoginRequest;
-import com.example.LostAndFound.dto.PasswordChangeRequest;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
 
-import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-import java.util.Collections;
-import java.util.Optional;
+import com.example.LostAndFound.dto.DashboardResponse;
+import com.example.LostAndFound.dto.LoginRequest;
+import com.example.LostAndFound.dto.PasswordChangeRequest;
+import com.example.LostAndFound.entity.User;
+import com.example.LostAndFound.repository.UserRepository;
+import com.example.LostAndFound.service.ItemService;
+import com.example.LostAndFound.service.UserService;
+
+import jakarta.validation.ConstraintViolationException;
 
 @RestController
 @RequestMapping("/api/users")
@@ -20,9 +31,17 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
+    private ItemService itemService;
+    private UserRepository userRepository;
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+     @GetMapping("/{userId}/dashboard")
+    public ResponseEntity<DashboardResponse> getUserDashboard(@PathVariable Long userId) {
+        DashboardResponse dashboardData = itemService.getDashboardData(userId);
+        return ResponseEntity.ok(dashboardData);
     }
 
     // Signup Endpoint
@@ -129,6 +148,5 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
-
 
 }

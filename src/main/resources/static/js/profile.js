@@ -105,3 +105,4 @@ document.querySelector(".change-password form").addEventListener("submit", funct
         alert("Failed to update password: " + error.message);
     });
 });
+

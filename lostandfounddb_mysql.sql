@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS items (
     ON DELETE CASCADE
     ON UPDATE CASCADE,
 
-  --CONSTRAINT fk_item_category
+  -- CONSTRAINT fk_item_category
    -- FOREIGN KEY (category_id) REFERENCES categories(category_id)
    -- ON DELETE SET NULL
    -- ON UPDATE CASCADE

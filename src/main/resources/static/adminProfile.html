@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Settings | Lost & Found</title>
-    <link rel="stylesheet" href="./css/Profile.css">
+    <link rel="stylesheet" href="./css/adminProfile.css">
 </head>
 <body>
     <div class="dashboard-container">
@@ -13,14 +13,18 @@
             <div class="sidebar-header">
                 <h2>Lost & Found System</h2>
             </div>
+            <div>
             <ul class="sidebar-nav">
-                <li class="nav-item">Home</li>
-                <li class="nav-item">Report Items</li>
-                <li class="nav-item">Search Items</li>
-                <li class="nav-item">Profile Settings</li>
-                <li class="nav-item">Help Center</li>
+                <li id="Home" class="nav-item">Home</li>
+                <li id="viewLostReports" class="nav-item">View Lost Reports</li>
+                <li id="viewFoundReports" class="nav-item">View Found Reports</li>
+                <li id="viewClaimedReports" class="nav-item">View Claimed Reports</li>
+                <li id="viewUsers" class="nav-item">View Users</li>
+                <li id="profileSettings" class="nav-item">Profile Settings</li>
+                <li id="logout" class="nav-item">Logout</li>
             </ul>
-        </div>
+           </div>
+           </div>
 
         <!-- Main Content -->
         <div class="main-content">
@@ -80,5 +84,6 @@
     </div>
 
     <script src = "./js/profile.js"></script>
+    <script src="./js/adminPanel.js"></script>
 </body>
 </html>
