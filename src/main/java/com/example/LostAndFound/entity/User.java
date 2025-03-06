@@ -4,7 +4,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "users")
@@ -42,9 +46,11 @@ public class User {
     private String password; // Will store a hashed password
 
     @Past(message = "Date of birth must be in the past")
-    @Temporal(TemporalType.DATE)
     @Column(name = "date_of_birth") // Matches DB column
-    private Date date_of_birth;
+    @JsonProperty("dateOfBirth")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate date_of_birth;
+
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -55,5 +61,34 @@ public class User {
 
     public enum Gender {
         Male, Female, Other
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    @Override
+    public String toString() {
+        return "User{" +
+            "username='" + username + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", email='" + email + '\'' +
+            ", date_of_birth=" + date_of_birth +
+            ", gender=" + gender +
+            ", createdAt=" + createdAt +
+            '}';
+    }
+
+    public LocalDate getDate_of_birth() {
+        return date_of_birth;
+    }
+    
+    public void setDate_of_birth(LocalDate date_of_birth) {
+        this.date_of_birth = date_of_birth;
     }
 }
