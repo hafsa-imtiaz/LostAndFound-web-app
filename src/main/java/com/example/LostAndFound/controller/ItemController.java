@@ -1,10 +1,13 @@
 package com.example.LostAndFound.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.LostAndFound.entity.Item;
 import com.example.LostAndFound.entity.ItemStatus;
+import com.example.LostAndFound.repository.ItemRepository;
 import com.example.LostAndFound.service.ItemService;
 
 @RestController
@@ -25,6 +29,21 @@ public class ItemController {
     public ItemController(ItemService itemService) {
         this.itemService = itemService;
     }
+    
+    @Autowired
+    private ItemRepository itemRepository;
+
+    @GetMapping("/lost")  // e.g. returns all 'lost' items
+    public List<Item> getLostItems() { 
+        return itemRepository.findByStatus("lost"); 
+    }
+    
+    // Or a simple getAll if you prefer:
+    @GetMapping("/all")
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
+    
 
     // 1. Report item
     @PostMapping("/report")
@@ -45,12 +64,14 @@ public class ItemController {
             // Convert string to enum, default to LOST if unknown
             ItemStatus status;
             switch (request.getStatus().toLowerCase()) {
-                case "found" -> status = ItemStatus.FOUND;
-                case "claimed" -> status = ItemStatus.CLAIMED;
-                case "returned" -> status = ItemStatus.RETURNED;
-                default -> status = ItemStatus.LOST;
+                case "found" -> status = ItemStatus.found;
+                case "claimed" -> status = ItemStatus.claimed;
+                case "returned" -> status = ItemStatus.returned;
+                default -> status = ItemStatus.lost;
             }
             item.setStatus(status);
+
+
 
             // If you want to store date in dateReported, you can parse request.getDate() 
             //item.setDateReported(LocalDateTime.parse(request.getDate(), DateTimeFormatter.ISO_DATE)); 

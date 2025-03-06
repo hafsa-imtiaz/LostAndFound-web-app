@@ -15,5 +15,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
         // Return top 5 by dateReported desc
         List<Item> findTop5ByUserIdOrderByDateReportedDesc(Long userId);
+        List<Item> findByStatus(String status);
 
 }

@@ -40,9 +40,9 @@ public class ItemService {
         dto.setFullName(fullName);
 
         // 2. Count items by status
-        long lostCount = itemRepository.countByUserIdAndStatus(userId, ItemStatus.LOST);
-        long foundCount = itemRepository.countByUserIdAndStatus(userId, ItemStatus.FOUND);
-        long claimedCount = itemRepository.countByUserIdAndStatus(userId, ItemStatus.CLAIMED);
+        long lostCount = itemRepository.countByUserIdAndStatus(userId, ItemStatus.lost);
+        long foundCount = itemRepository.countByUserIdAndStatus(userId, ItemStatus.found);
+        long claimedCount = itemRepository.countByUserIdAndStatus(userId, ItemStatus.claimed);
         // If you want returned count: itemRepository.countByUserIdAndStatus(userId, ItemStatus.RETURNED);
 
         dto.setLostCount(lostCount);
