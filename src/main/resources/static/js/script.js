@@ -16,8 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
           window.location.href = "userhome.html"; // Redirect to dashboard
       });
 
-      
-
+    
 
     // Initially, login is active => disable login button
     btnLogin.disabled = true;
@@ -128,41 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
-    // 3. Save Profile Changes Button
-
-    const saveChangesBtn = document.querySelector(".profile-form .action-btn");
-    if (saveChangesBtn) {
-        saveChangesBtn.addEventListener("click", (event) => {
-            event.preventDefault();
-            alert("Profile details saved successfully!");
-        });
-    }
-
-
-    // 4. Update Password Button
-
-    const updatePasswordBtn = document.querySelector(".change-password .action-btn");
-    if (updatePasswordBtn) {
-        updatePasswordBtn.addEventListener("click", (event) => {
-            event.preventDefault();
-            const currentPassword = document.getElementById("currentPassword").value;
-            const newPassword = document.getElementById("newPassword").value;
-            const confirmPassword = document.getElementById("confirmPassword").value;
-
-            if (!currentPassword || !newPassword || !confirmPassword) {
-                alert("Please fill in all password fields.");
-                return;
-            }
-
-            if (newPassword !== confirmPassword) {
-                alert("New passwords do not match!");
-                return;
-            }
-
-            alert("Password updated successfully!");
-        });
-    }
 });
 
   

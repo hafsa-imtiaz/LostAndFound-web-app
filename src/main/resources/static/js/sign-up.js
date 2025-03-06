@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const firstName = document.getElementById("fname").value;
         const lastName = document.getElementById("lname").value;
         const username = document.getElementById("username").value;
-        const date_of_birth = document.getElementById("dob").value;
+        const dateOfBirth = document.getElementById("dob").value;
         const gender = document.getElementById("gender").value;
         const email = document.getElementById("signupEmail").value;
         const password = document.getElementById("signupPassword").value;
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch("http://localhost:8080/api/users/signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ firstName, lastName, username, date_of_birth, gender, email, password }),
+                body: JSON.stringify({ firstName, lastName, username, dateOfBirth, gender, email, password }),
             });
 
             if (response.ok) {

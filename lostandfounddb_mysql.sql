@@ -10,10 +10,11 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR(100) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,    -- hashed password
   date_of_birth DATE,
-  gender ENUM('Male','Female','Other') DEFAULT 'Other',
+  gender ENUM('Male', 'Female', 'Other') DEFAULT 'Other',
+  profile_picture LONGBLOB,  -- URL or file path for the profile picture
+  user_type ENUM('User', 'Admin') DEFAULT 'User',  -- User role type
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 
 CREATE TABLE IF NOT EXISTS categories (
   category_id INT AUTO_INCREMENT PRIMARY KEY,
