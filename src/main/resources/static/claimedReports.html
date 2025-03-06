@@ -38,22 +38,23 @@
       <h2>Claimed Reports</h2>
       <table>
         <thead>
-          <tr>
-            <th>Report ID</th>
-            <th>Item Name</th>
-            <th>Type</th>
-            <th>Date Reported</th>
-            <th>Status</th>
-          </tr>
+            <tr>
+                <th>Item ID</th>
+                <th>Item Name</th>
+                <th>Type</th>
+                <th>Description</th>  <!-- Added -->
+                <th>Location</th>      <!-- Added -->
+                <th>Date Reported</th>
+                <th>Reported By</th>
+            </tr>
         </thead>
-        <tbody id="reportsTableBody">
-          <!-- Rows populated by JS -->
+        <tbody id="claimedReportsTableBody">
+            <!-- Rows populated by JS -->
         </tbody>
-      </table>
     </div>
   </div>
 
   <!-- Link to external JS at the bottom -->
-  <script src="./js/adminPanel.js"></script>
+  <script src="./js/claimedReport.js"></script>
 </body>
 </html>

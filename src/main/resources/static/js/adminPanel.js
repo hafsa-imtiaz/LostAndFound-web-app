@@ -1,85 +1,87 @@
-// adminPanel.js
-
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("Admin panel script loaded.");
-
-  // 1) Example placeholders for data (replace with real fetch calls)
-  const totalUsers = 25;
-  const lostCount = 15;
-  const foundCount = 8;
-  const claimedCount = 3;
-
-  document.getElementById("totalUsersCount").textContent = totalUsers;
-  document.getElementById("lostReportsCount").textContent = lostCount;
-  document.getElementById("foundReportsCount").textContent = foundCount;
-  document.getElementById("claimedReportsCount").textContent = claimedCount;
-
-  // 2) Dummy data for the table
-  const reportsData = [
-    { id: 1, name: "Black Wallet", type: "Lost Item", date: "2025-03-01", status: "Lost" },
-    { id: 2, name: "Red Bag", type: "Found Item", date: "2025-03-02", status: "Found" },
-    { id: 3, name: "ID Card", type: "Claimed", date: "2025-03-03", status: "Claimed" },
-  ];
-
+document.addEventListener("DOMContentLoaded", async () => {
   const tableBody = document.getElementById("reportsTableBody");
-  reportsData.forEach(report => {
-    const row = document.createElement("tr");
+  const lostCountElement = document.getElementById("lostReportsCount");
+  const foundCountElement = document.getElementById("foundReportsCount");
+  const claimedCountElement = document.getElementById("claimedReportsCount");
+  const userCountElement = document.getElementById("totalUsersCount");
 
-    const idCell = document.createElement("td");
-    idCell.textContent = report.id;
-    row.appendChild(idCell);
+  try {
+      const response = await fetch("http://localhost:8080/api/users/count"); // Adjust API URL if needed
+      if (!response.ok) 
+        throw new Error("Failed to fetch user count");
 
-    const nameCell = document.createElement("td");
-    nameCell.textContent = report.name;
-    row.appendChild(nameCell);
+      const userCount = await response.json(); // Assuming backend returns just a number
+      userCountElement.textContent = userCount; // Update the UI
 
-    const typeCell = document.createElement("td");
-    typeCell.textContent = report.type;
-    row.appendChild(typeCell);
+  } catch (error) {
+      console.error("Error loading user count:", error);
+  }
 
-    const dateCell = document.createElement("td");
-    dateCell.textContent = report.date;
-    row.appendChild(dateCell);
+  try {
+      const response = await fetch("http://localhost:8080/api/items/all"); // Adjust API URL if needed
+      if (!response.ok) 
+        throw new Error("Failed to fetch items");
 
-    const statusCell = document.createElement("td");
-    statusCell.textContent = report.status;
-    row.appendChild(statusCell);
+      const items = await response.json();
+      tableBody.innerHTML = ""; // Clear existing data
 
-    tableBody.appendChild(row);
-  });
+      // Counters for different item statuses
+      let lostCount = 0, foundCount = 0, claimedCount = 0;
 
+      items.forEach(item => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+              <td>${item.itemId}</td>
+              <td>${item.itemName}</td>
+              <td>${item.itemType}</td>
+              <td>${new Date(item.dateReported).toLocaleDateString()}</td>
+              <td>${item.status}</td>
+          `;
+          tableBody.appendChild(row);
+
+          // Update counts based on status
+          if (item.status === "lost") lostCount++;
+          else if (item.status === "found") foundCount++;
+          else if (item.status === "claimed") claimedCount++;
+      });
+
+      // Update the statistics headings
+      lostCountElement.textContent = lostCount;
+      foundCountElement.textContent = foundCount;
+      claimedCountElement.textContent = claimedCount;
+
+  } catch (error) {
+      console.error("Error loading items:", error);
+  }
 });
 
 
 
-  // 3) Sidebar navigation logic
-  document.getElementById("Home").addEventListener("click", () => {
-    window.location.href = "AdminPanel.html";
-  });
+document.getElementById("Home").addEventListener("click", () => {
+  window.location.href = "AdminPanel.html";
+});
 
-  //    Replace these with real pages you have or plan to create
-  document.getElementById("viewLostReports").addEventListener("click", () => {
-    // Example: navigate to a separate "lostReports.html" page
-    window.location.href = "lostReports.html";
-  });
+document.getElementById("viewLostReports").addEventListener("click", () => {
+  window.location.href = "lostReports.html";
+});
 
-  document.getElementById("viewFoundReports").addEventListener("click", () => {
-    window.location.href = "foundReports.html";
-  });
+document.getElementById("viewFoundReports").addEventListener("click", () => {
+  window.location.href = "foundReports.html";
+});
 
-  document.getElementById("viewClaimedReports").addEventListener("click", () => {
-    window.location.href = "claimedReports.html";
-  });
+document.getElementById("viewClaimedReports").addEventListener("click", () => {
+  window.location.href = "claimedReports.html";
+});
 
-  document.getElementById("viewUsers").addEventListener("click", () => {
-    window.location.href = "userReports.html";
-  });
+document.getElementById("viewUsers").addEventListener("click", () => {
+  window.location.href = "userReports.html";
+});
 
-  document.getElementById("profileSettings").addEventListener("click", () => {
-    window.location.href = "adminProfile.html";
-  });
+document.getElementById("profileSettings").addEventListener("click", () => {
+  window.location.href = "adminProfile.html";
+});
 
-  document.getElementById("logout").addEventListener("click", () => {
-    localStorage.removeItem("loggedInUser");
-    window.location.href = "signup.html";
-  });
+document.getElementById("logout").addEventListener("click", () => {
+  localStorage.removeItem("loggedInUser");
+  window.location.href = "signup.html";
+});

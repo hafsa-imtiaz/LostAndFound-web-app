@@ -39,6 +39,15 @@ public class ItemController {
     return itemRepository.findLostItemsWithUsernames();
     }
 
+    @GetMapping("/claimed")  // e.g. returns all 'lost' items
+    public List<Item> getClaimedItems() { 
+        return itemRepository.findByStatus(ItemStatus.claimed); 
+    }
+
+    @GetMapping("/found")  // e.g. returns all 'lost' items
+    public List<Item> getFoundItems() { 
+        return itemRepository.findByStatus(ItemStatus.found); 
+    }
     
     // Or a simple getAll if you prefer:
     @GetMapping("/all")
