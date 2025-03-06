@@ -105,4 +105,9 @@ CREATE TABLE IF NOT EXISTS audit_logs (
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO users (first_name, last_name, username, email, password, date_of_birth, gender, user_type) 
+VALUES ('Admin', 'User', 'adminprofile', 'admin@lostandfound.com', '$2a$10$fRW2rYIcxF8595PgrG3rDOJCpA6xvAjkkPTkMrJjaDmtXZ7kzgVhq', '1995-08-25', 'Male', 'Admin');
+-- HASH: '$2a$10$fRW2rYIcxF8595PgrG3rDOJCpA6xvAjkkPTkMrJjaDmtXZ7kzgVhq'
+-- PASSWORD: admin123
+
 SELECT * FROM USERS;

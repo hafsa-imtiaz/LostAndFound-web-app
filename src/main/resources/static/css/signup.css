@@ -1,148 +1,217 @@
 /* RESET */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Arial', sans-serif;
-    background: #f0f0f0;
-  }
-  
-  /* Container: two panels side by side */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f0f0f0;
+}
+
+/* Container: two panels side by side */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 900px;
+  height: auto;
+  margin: 4rem auto;
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Left & Right panels */
+.left-panel,
+.right-panel {
+  width: 50%;
+  min-height: 550px;
+  position: relative;
+}
+
+/* Left panel */
+.left-panel {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* panel-form: a container for each form (login or signup) */
+.panel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panel-form h2 {
+  margin-bottom: 0.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Make sign-up form scrollable */
+.scrollable {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 400px;
+}
+
+/* Right panel */
+.right-panel {
+  background: #0083b0;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Toggle Buttons */
+.toggle-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.toggle-btn {
+  padding: 0.5rem 1rem;
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.toggle-btn:disabled {
+  background: #fff;
+  color: #0083b0;
+  cursor: not-allowed;
+}
+
+/* Panel Image */
+.panel-image {
+  max-width: 70%;
+  margin-top: 1rem;
+  border-radius: 6px;
+  border: 2px solid #fff;
+}
+
+/* Form elements */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+input,
+select {
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+button[type="submit"] {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background: #0083b0;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background: #00b4db;
+}
+
+.forgot {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: left;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* Tablet view */
+@media (max-width: 768px) {
   .container {
-    display: flex;
-    width: 900px;   /* adjust as needed */
-    height: 550px; /* adjust as needed */
-    margin: 4rem auto;
-    background: #fff;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    overflow: hidden;
+      flex-direction: column;
+      width: 90%;
+      height: auto;
   }
-  
-  /* Left & Right panels each 50% */
-  .left-panel, 
+
+  .left-panel,
   .right-panel {
-    width: 50%;
-    position: relative;
+      width: 100%;
+      min-height: auto;
+      padding: 1.5rem;
   }
-  
-  /* Left panel: put forms inside */
-  .left-panel {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  /* panel-form: a container for each form (login or signup) */
-  .panel-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .panel-form h2 {
-    margin-bottom: 0.5rem;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  /* Make sign-up form container scrollable */
-  .scrollable {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* for smoother iOS scrolling */
-  }
-  
-  /* Right panel (blue side) */
+
   .right-panel {
-    background: #0083b0;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
+      order: -1; /* Moves the right panel above the form */
+      text-align: center;
+      padding: 2rem 1rem;
   }
-  
-  /* Toggle Buttons */
-  .toggle-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .toggle-btn {
-    padding: 0.5rem 1rem;
-    border: 2px solid #fff;
-    background: transparent;
-    color: #fff;
-    font-weight: 600;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  
-  .toggle-btn:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  /* Disabled button style (the active panel button) */
-  .toggle-btn:disabled {
-    background: #fff;
-    color: #0083b0;
-    cursor: not-allowed;
-  }
-  
-  /* Panel Image */
+
   .panel-image {
-    max-width: 70%;
-    margin-top: 1rem;
-    border-radius: 6px;
-    border: 2px solid #fff;
+      max-width: 60%;
   }
-  
-  /* Form elements inside panel-form */
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem; /* space between label/input sets */
+
+  .toggle-buttons {
+      justify-content: center;
   }
-  
-  label {
-    font-weight: 600;
+}
+
+/* Mobile view */
+@media (max-width: 480px) {
+  .container {
+      width: 95%;
+      padding: 1rem;
   }
-  
+
+  .left-panel {
+      padding: 1rem;
+  }
+
+  .right-panel {
+      padding: 1rem;
+  }
+
+  .panel-image {
+      max-width: 50%;
+  }
+
   input,
   select {
-    padding: 0.6rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+      font-size: 1rem;
   }
-  
+
+  .toggle-btn {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+  }
+
   button[type="submit"] {
-    padding: 0.75rem;
-    border: none;
-    border-radius: 4px;
-    background: #0083b0;
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
+      font-size: 1rem;
+      padding: 0.6rem;
   }
-  
-  button[type="submit"]:hover {
-    background: #00b4db;
-  }
-  
-  .forgot {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-    color: #666;
-    text-align: left;
-  }
-  
+}
