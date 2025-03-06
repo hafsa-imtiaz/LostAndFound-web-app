@@ -1,4 +1,5 @@
 package com.example.LostAndFound.repository;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,7 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.example.LostAndFound.dto.LostItemView;
 import com.example.LostAndFound.entity.Item;
-import com.example.LostAndFound.entity.ItemStatus;;
+import com.example.LostAndFound.entity.ItemStatus;
+;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
@@ -32,5 +34,20 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
         // Return top 5 by dateReported desc
         List<Item> findTop5ByUserIdOrderByDateReportedDesc(Long userId);
         List<Item> findByStatus(ItemStatus status);
+
+        @Query("""
+       SELECT i
+       FROM Item i
+       WHERE 
+         (:category IS NULL OR :category = '' OR i.itemType = :category)
+         AND (:status IS NULL OR :status = '' OR i.status = :status)
+         AND (:date IS NULL OR FUNCTION('DATE', i.dateReported) = :date)
+    """)
+    List<Item> searchWithFilters(
+        @Param("category") String category,
+        @Param("status") String status,
+        @Param("date") LocalDate date
+    );
+
 
 }

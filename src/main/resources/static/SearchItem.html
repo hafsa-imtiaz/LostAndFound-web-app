@@ -31,7 +31,7 @@
 
             <!-- Search Bar and Filters -->
             <div class="search-filters">
-                <input type="text" id="searchInput" placeholder="Search by item name, location, etc.">
+                <input type="text" id="searchInput" placeholder="Search by item name">
                 <div class="filters">
                     <select id="categoryFilter">
                         <option value="">All Categories</option>
@@ -39,6 +39,9 @@
                         <option>Documents</option>
                         <option>Clothing</option>
                         <option>Accessories</option>
+                        <option>Books</option>
+                        <option>Keys</option>
+                        <option>Other</option>
                     </select>
                     <select id="statusFilter">
                         <option value="">All Statuses</option>
@@ -46,26 +49,37 @@
                         <option>Found</option>
                     </select>
                     <input type="date" id="dateFilter">
-                    <button class="action-btn">Apply Filters</button>
+                    <!-- Change the button to have the correct ID -->
+                   <button id="filterBtn" class="action-btn">Apply Filters</button>
+
                 </div>
             </div>
 
-            <!-- Search Results -->
-            <div class="search-results">
-                <div class="result-item">
-                    <img src="./images/placeholder.jpg" alt="Item Image" class="item-thumbnail">
-                    <div class="item-info">
-                        <h3>Black Leather Wallet</h3>
-                        <p><strong>Location:</strong> Main Library</p>
-                        <p><strong>Date:</strong> 2023-12-01</p>
-                        <p><strong>Status:</strong> Lost</p>
-                        <button id = "View Details" class="action-btn">View Details</button>
-                    </div>
-                </div>
-                <!-- Add more result items as needed -->
-            </div>
-        </div>
+            <!-- Search Results as a table -->
+      <div class="search-results">
+        <table>
+            <thead>
+              <tr>
+                <th>Item ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Date Reported</th>
+              </tr>
+            </thead>
+            <tbody id="searchTableBody">
+              <!-- Filled by JS -->
+            </tbody>
+          </table>
+          
+      </div>
+
+
     </div>
+</div>
     <script src = "./js/script.js"></script>
+    <script src = "./js/search.js"></script>
 </body>
 </html>

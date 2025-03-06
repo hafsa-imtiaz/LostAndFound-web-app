@@ -1,5 +1,6 @@
 package com.example.LostAndFound.service;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +28,22 @@ public class ItemService {
     public Item saveItem(Item item) {
         return itemRepository.save(item);
     }
+    public Item getItemById(Long id) {
+        return itemRepository.findById(id).orElse(null);
+    }
+    
+   public List<Item> searchItems(String category, String status, LocalDate date) {
+        ItemStatus itemStatus;
+        
+        try {
+            itemStatus = ItemStatus.valueOf(status.toLowerCase()); // Convert string to enum
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid status value: " + status);
+        }
+        
+        return itemRepository.findByStatus(itemStatus);
+    }
+
     
     public DashboardResponse getDashboardData(Long userId) {
         DashboardResponse dto = new DashboardResponse();

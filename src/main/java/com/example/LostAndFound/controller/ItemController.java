@@ -1,16 +1,21 @@
 package com.example.LostAndFound.controller;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.LostAndFound.dto.LostItemView;
@@ -63,12 +68,32 @@ public class ItemController {
     public List<LostItemView> getFoundItems() { 
         return itemRepository.findItemsWithUsernameByStatus("found"); 
     }
+
+    @GetMapping("/search")
+    public List<Item> searchItems(
+        @RequestParam(required = false) String category,
+        @RequestParam(required = false) String status,
+        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date
+    ) {
+        // If you want to handle "no filters" as "return all", or do partial matches, etc.
+        return itemService.searchItems(category, status, date);
+    }
+    
+
     // Or a simple getAll if you prefer:
     @GetMapping("/all")
     public List<Item> getAllItems() {
         return itemRepository.findAll();
     }
     
+     @GetMapping("/{id}")
+    public ResponseEntity<Item> getItemById(@PathVariable Long id) {
+        Item item = itemService.getItemById(id);
+        if (item == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(item);
+    }
 
     // 1. Report item
     @PostMapping("/report")
