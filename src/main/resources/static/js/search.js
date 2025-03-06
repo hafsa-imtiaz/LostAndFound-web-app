@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const status = statusFilter.value;
       const date = dateFilter.value;
   
-      let url = "http://localhost:8080/api/items/search?";
+      let url = "http://localhost:8080/api/items/all";
       const params = [];
       if (searchVal) params.push(`q=${encodeURIComponent(searchVal)}`);
       if (category) params.push(`category=${encodeURIComponent(category)}`);
