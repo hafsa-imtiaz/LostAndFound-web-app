@@ -2,9 +2,12 @@ package com.example.LostAndFound.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.format.annotation.*;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -98,11 +101,7 @@ public class ItemController {
             Item item = new Item();
     
             // Retrieve userId from the request
-            Long userId = request.getUserId();
-            if (userId == null) {
-                throw new IllegalArgumentException("User ID is required");
-            }
-    
+            Long userId = request.getUserId();    
             // Set the userId
             item.setUserId(userId);
     
@@ -145,7 +144,6 @@ public class ItemController {
         }
     }
 }
-
 
 class ReportItemRequest {
     private String itemType;     // "lost" / "found"

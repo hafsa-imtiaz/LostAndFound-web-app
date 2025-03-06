@@ -21,12 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const date = dateFilter.value;
   
       let url = "http://localhost:8080/api/items/all";
-      const params = [];
-      if (searchVal) params.push(`q=${encodeURIComponent(searchVal)}`);
-      if (category) params.push(`category=${encodeURIComponent(category)}`);
-      if (status) params.push(`status=${encodeURIComponent(status)}`);
-      if (date) params.push(`date=${encodeURIComponent(date)}`);
-      url += params.join("&");
   
       try {
         const response = await fetch(url);
