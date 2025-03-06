@@ -13,7 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("username").value = user.username || "";
             document.getElementById("email").value = user.email || "";
             document.getElementById("gender").value = user.gender || "";
-            document.getElementById("dob").value = user.date_of_birth || "";
+            document.getElementById("dob").value = user.dateOfBirth || "";
+            //console.log("Received date_of_birth:", user.dateOfBirth);
+            //console.log("Received date_of_birth:", document.getElementById("dob").value);
         })
         .catch(error => {
             console.error("Error fetching user data:", error);
