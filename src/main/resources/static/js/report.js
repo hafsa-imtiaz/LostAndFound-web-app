@@ -1,39 +1,38 @@
 // report.js
-
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("report.js loaded");
+  const reportForm = document.getElementById("reportItemForm");
+  if (!reportForm) return;
 
-  const reportItemForm = document.getElementById("reportItemForm");
-  if (!reportItemForm) return; // Safety check
-
-  reportItemForm.addEventListener("submit", async (e) => {
-    e.preventDefault(); // Stop page refresh
+  reportForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
     // 1. Gather form data
-    const itemType    = document.getElementById("itemType").value;       // "lost" / "found"
-    const itemName    = document.getElementById("itemName").value;
-    const category    = document.getElementById("category").value;       // e.g. "Electronics"
-    const description = document.getElementById("description").value;
-    const location    = document.getElementById("location").value;
-    const date        = document.getElementById("date").value;           // "yyyy-mm-dd"
+    const statusValue   = document.getElementById("statusSelect").value;   // "lost"/"found"/"claimed"/"returned"
+    const itemTypeValue = document.getElementById("itemTypeSelect").value; // "Electronics"/"Clothing"/...
+    const itemName      = document.getElementById("itemName").value;
+    const description   = document.getElementById("description")?.value || "";
+    const location      = document.getElementById("location")?.value || "";
+    const date          = document.getElementById("date")?.value || "";
+    let imageFileName   = "";
 
-    // For a real file upload, you'd typically do a FormData + multipart request.
-    // Here we’ll just store the file name/path as a placeholder.
+    // If there's a file input
     const fileInput = document.getElementById("itemImage");
-    let imageFileName = "";
-    if (fileInput.files && fileInput.files[0]) {
-      imageFileName = fileInput.files[0].name;
+    if (fileInput && fileInput.files[0]) {
+      imageFileName = fileInput.files[0].name; // Storing the file name (not a real file upload)
     }
 
-    // 2. Build JSON payload
-    const requestData = {
-      itemType,    // which will map to "status" in the backend
+    // 2. Build JSON
+    // We'll pass two separate fields:
+    //  - 'status' or 'category' for the ID or name referencing the categories table
+    //  - 'itemType' for electronics, clothing, etc.
+    const requestBody = {
+      status: statusValue,
+      itemType: itemTypeValue,
       itemName,
-      category,    
       description,
       location,
-      date,        // date lost/found
-      image: imageFileName
+      date,
+      imageFileName
     };
 
     try {
@@ -41,20 +40,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("http://localhost:8080/api/items/report", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestData)
+        body: JSON.stringify(requestBody)
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        alert("Item reported successfully!");
-        // Optionally reset the form
-        reportItemForm.reset();
-      } else {
+      if (!response.ok) {
         const errorData = await response.json();
         alert(errorData.message || "Failed to report item.");
+        return;
       }
-    } catch (error) {
-      console.error("Error reporting item:", error);
+
+      // On success
+      const responseData = await response.json();
+      alert("Item reported successfully!");
+      console.log("Response:", responseData);
+      reportForm.reset();
+    } catch (err) {
+      console.error("Error:", err);
       alert("Server error. Please try again later.");
     }
   });
