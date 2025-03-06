@@ -38,20 +38,22 @@ public class ItemController {
 
             // Map fields
             item.setItemName(request.getItemName());
+            item.setItemType(request.getItemType());
             item.setDescription(request.getDescription());
             item.setLocation(request.getLocation());
-            // If you have a "category_id" foreign key, convert the string to ID or handle differently
-            // item.setCategoryId(...);
-
-            // Convert itemType ("lost"/"found") to enum
-            if ("found".equalsIgnoreCase(request.getItemType())) {
-                item.setStatus(ItemStatus.FOUND);
-            } else {
-                item.setStatus(ItemStatus.LOST); // default
+            
+            // Convert string to enum, default to LOST if unknown
+            ItemStatus status;
+            switch (request.getStatus().toLowerCase()) {
+                case "found" -> status = ItemStatus.FOUND;
+                case "claimed" -> status = ItemStatus.CLAIMED;
+                case "returned" -> status = ItemStatus.RETURNED;
+                default -> status = ItemStatus.LOST;
             }
+            item.setStatus(status);
 
             // If you want to store date in dateReported, you can parse request.getDate() 
-            // item.setDateReported(LocalDateTime.parse(request.getDate(), DateTimeFormatter.ISO_DATE)); 
+            //item.setDateReported(LocalDateTime.parse(request.getDate(), DateTimeFormatter.ISO_DATE)); 
             // Or just rely on default timestamp
 
             // For the image, store the filename or path
@@ -73,13 +75,12 @@ public class ItemController {
         }
     }
     
-    // ... other item endpoints (GET, update, etc.)
 }
 
 class ReportItemRequest {
     private String itemType;     // "lost" / "found"
     private String itemName;
-    private String category;
+    private String status;
     private String description;
     private String location;
     private String date;         // "yyyy-mm-dd"
@@ -92,8 +93,8 @@ class ReportItemRequest {
     public String getItemName() { return itemName; }
     public void setItemName(String itemName) { this.itemName = itemName; }
 
-    public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }

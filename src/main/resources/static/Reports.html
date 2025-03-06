@@ -36,7 +36,7 @@
                 <form id="reportItemForm">
                     <!-- Item Type (Lost/Found) -->
                     <div class="form-group">
-                        <label for="statusSelect">Status</label>
+                        <label for="statusSelect">Item Type</label>
                         <select id="statusSelect" required>
                             <option value="">Select Type</option>
                             <option value="lost">Lost Item</option>
@@ -52,13 +52,16 @@
 
                     <!-- Category -->
                     <div class="form-group">
-                        <label for="itemTypeSelect">Item Type</label>
+                        <label for="itemTypeSelect">Item Category</label>
                         <select id="itemTypeSelect" required>
                             <option value="">Select Category</option>
                             <option>Electronics</option>
                             <option>Documents</option>
                             <option>Clothing</option>
                             <option>Accessories</option>
+                            <option>Books</option>
+                            <option>Keys</option>
+                            <option>Other</option>
                         </select>
                     </div>
 
@@ -95,6 +98,7 @@
     </div>
 
     <script src="./js/report.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 
 </html>

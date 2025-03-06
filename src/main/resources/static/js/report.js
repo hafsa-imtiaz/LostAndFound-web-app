@@ -8,14 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 1. Gather form data
     const statusValue   = document.getElementById("statusSelect").value;   // "lost"/"found"/"claimed"/"returned"
-    const itemTypeValue = document.getElementById("itemTypeSelect").value; // "Electronics"/"Clothing"/...
     const itemName      = document.getElementById("itemName").value;
+    const itemTypeValue = document.getElementById("itemTypeSelect").value; // "Electronics"/"Clothing"/...
     const description   = document.getElementById("description")?.value || "";
     const location      = document.getElementById("location")?.value || "";
     const date          = document.getElementById("date")?.value || "";
+    
     let imageFileName   = "";
-
-    // If there's a file input
     const fileInput = document.getElementById("itemImage");
     if (fileInput && fileInput.files[0]) {
       imageFileName = fileInput.files[0].name; // Storing the file name (not a real file upload)
@@ -27,8 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     //  - 'itemType' for electronics, clothing, etc.
     const requestBody = {
       status: statusValue,
-      itemType: itemTypeValue,
       itemName,
+      itemType: itemTypeValue,
       description,
       location,
       date,
@@ -52,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // On success
       const responseData = await response.json();
       alert("Item reported successfully!");
-      console.log("Response:", responseData);
+      console.log("Reported Data:", responseData);
       reportForm.reset();
     } catch (err) {
       console.error("Error:", err);
