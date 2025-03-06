@@ -5,18 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const signupForm = document.getElementById("signupForm");
     const btnemail = document.getElementById("email-btn");
 
-      // Form submission handlers
-      document.getElementById("loginForm").addEventListener("submit", (e) => {
-          e.preventDefault(); // Prevent default form submission
-          window.location.href = "userhome.html"; // Redirect to dashboard
-      });
-  
-      document.getElementById("signupForm").addEventListener("submit", (e) => {
-          e.preventDefault(); // Prevent default form submission
-          window.location.href = "userhome.html"; // Redirect to dashboard
-      });
+    // Form submission handlers
+    document.getElementById("loginForm").addEventListener("submit", (e) => {
+        e.preventDefault(); // Prevent default form submission
+        window.location.href = "userhome.html"; // Redirect to dashboard
+    });
 
-    
+    document.getElementById("signupForm").addEventListener("submit", (e) => {
+        e.preventDefault(); // Prevent default form submission
+        window.location.href = "userhome.html"; // Redirect to dashboard
+    });
 
     // Initially, login is active => disable login button
     btnLogin.disabled = true;
@@ -129,4 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-  
+document.getElementById("logout").addEventListener("click", () => {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "signup.html";
+  });

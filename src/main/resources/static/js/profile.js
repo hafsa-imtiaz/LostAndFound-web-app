@@ -23,6 +23,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 });
 
+document.getElementById("logout").addEventListener("click", () => {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "signup.html";
+  });
+
 // Handle profile update
 document.querySelector(".profile-form").addEventListener("submit", function (event) {
     event.preventDefault();

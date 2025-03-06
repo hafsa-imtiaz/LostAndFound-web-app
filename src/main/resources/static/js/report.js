@@ -59,3 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+document.getElementById("logout").addEventListener("click", () => {
+  localStorage.removeItem("loggedInUser");
+  window.location.href = "signup.html";
+});
