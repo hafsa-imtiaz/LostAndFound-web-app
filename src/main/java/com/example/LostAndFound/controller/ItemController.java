@@ -33,10 +33,17 @@ public class ItemController {
     @Autowired
     private ItemRepository itemRepository;
 
-    @GetMapping("/lost")
-    public List<Item> getLostItems() {
-        return itemRepository.findByStatus(ItemStatus.LOST);
+    @GetMapping("/lost")  // e.g. returns all 'lost' items
+    public List<Item> getLostItems() { 
+        return itemRepository.findByStatus("lost"); 
     }
+    
+    // Or a simple getAll if you prefer:
+    @GetMapping("/all")
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
+    
 
     // 1. Report item
     @PostMapping("/report")
@@ -57,10 +64,10 @@ public class ItemController {
             // Convert string to enum, default to LOST if unknown
             ItemStatus status;
             switch (request.getStatus().toLowerCase()) {
-                case "found" -> status = ItemStatus.FOUND;
-                case "claimed" -> status = ItemStatus.CLAIMED;
-                case "returned" -> status = ItemStatus.RETURNED;
-                default -> status = ItemStatus.LOST;
+                case "found" -> status = ItemStatus.found;
+                case "claimed" -> status = ItemStatus.claimed;
+                case "returned" -> status = ItemStatus.returned;
+                default -> status = ItemStatus.lost;
             }
             item.setStatus(status);
 
