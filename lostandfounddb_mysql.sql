@@ -23,8 +23,9 @@ CREATE TABLE IF NOT EXISTS categories (
 CREATE TABLE IF NOT EXISTS items (
   item_id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,              -- user who posted the item
-  category_id INT NULL,              -- optional category reference
+  --category_id INT NULL,              -- optional category reference
   item_name VARCHAR(100) NOT NULL,
+  item_type VARCHAR(100) NOT NULL,
   description TEXT,
   location VARCHAR(100),
   status ENUM('lost','found','claimed','returned') DEFAULT 'lost',
@@ -36,10 +37,10 @@ CREATE TABLE IF NOT EXISTS items (
     ON DELETE CASCADE
     ON UPDATE CASCADE,
 
-  CONSTRAINT fk_item_category
-    FOREIGN KEY (category_id) REFERENCES categories(category_id)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE
+  --CONSTRAINT fk_item_category
+   -- FOREIGN KEY (category_id) REFERENCES categories(category_id)
+   -- ON DELETE SET NULL
+   -- ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS claims (
