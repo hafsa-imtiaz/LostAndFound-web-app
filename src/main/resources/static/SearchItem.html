@@ -49,37 +49,36 @@
                         <option>Found</option>
                     </select>
                     <input type="date" id="dateFilter">
-                    <!-- Change the button to have the correct ID -->
-                   <button id="filterBtn" class="action-btn">Apply Filters</button>
-
+                    <!-- Apply Filters Button -->
+                    <button id="filterBtn" class="action-btn">Apply Filters</button>
+                    <!-- Clear Filters Button -->
+                    <button id="clearFiltersBtn" class="action-btn">Clear Filters</button>
                 </div>
             </div>
 
             <!-- Search Results as a table -->
-      <div class="search-results">
-        <table>
-            <thead>
-              <tr>
-                <th>Item ID</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Status</th>
-                <th>Description</th>
-                <th>Location</th>
-                <th>Date Reported</th>
-              </tr>
-            </thead>
-            <tbody id="searchTableBody">
-              <!-- Filled by JS -->
-            </tbody>
-          </table>
-          
-      </div>
-
-
+            <div class="search-results">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Description</th>
+                            <th>Location</th>
+                            <th>Date Reported</th>
+                        </tr>
+                    </thead>
+                    <tbody id="searchTableBody">
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
-    <script src = "./js/script.js"></script>
-    <script src = "./js/search.js"></script>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/search.js"></script>
 </body>
 </html>

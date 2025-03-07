@@ -1,38 +1,5 @@
+/*
 document.addEventListener("DOMContentLoaded", () => {
-    const btnLogin = document.getElementById("btnLogin");
-    const btnSignup = document.getElementById("btnSignup");
-    const loginForm = document.getElementById("loginForm");
-    const signupForm = document.getElementById("signupForm");
-    const btnemail = document.getElementById("email-btn");
-
-    // Initially, login is active => disable login button
-    btnLogin.disabled = true;
-    btnSignup.disabled = false;
-    loginForm.classList.remove("hidden");
-    signupForm.classList.add("hidden");
-  
-    // Toggle to Login
-    btnLogin.addEventListener("click", () => {
-      if (!btnLogin.disabled) {
-        loginForm.classList.remove("hidden");
-        signupForm.classList.add("hidden");
-        btnLogin.disabled = true;
-        btnSignup.disabled = false;
-      }
-    });
-  
-    // Toggle to Sign Up
-    btnSignup.addEventListener("click", () => {
-      if (!btnSignup.disabled) {
-        signupForm.classList.remove("hidden");
-        loginForm.classList.add("hidden");
-        btnSignup.disabled = true;
-        btnLogin.disabled = false;
-      }
-    });
-  });
-
-  document.addEventListener("DOMContentLoaded", () => {
     const messageUserBtn = document.getElementById("email-btn");
 
     if (messageUserBtn) {
@@ -53,12 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+*/
 
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     console.log("Script loaded successfully");
-
-
-    // 1. Sidebar Navigation Handling
 
     const sidebarItems = document.querySelectorAll(".nav-item");
     sidebarItems.forEach(item => {
@@ -85,6 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+    
+    document.getElementById("logout").addEventListener("click", () => {
+        localStorage.removeItem("loggedInUser");
+        window.location.href = "signup.html";
+    });
 
     const viewDetailsButton = document.getElementById("View Details");
     if (viewDetailsButton) {
@@ -92,10 +62,5 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "itemDetails.html";
         });
     }
-
 });
 
-document.getElementById("logout").addEventListener("click", () => {
-    localStorage.removeItem("loggedInUser");
-    window.location.href = "signup.html";
-  });

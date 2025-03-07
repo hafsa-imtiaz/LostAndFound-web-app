@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
+    transition: all 0.3s ease;
 }
 
 /* Dashboard Container */
@@ -19,11 +20,16 @@
     padding: 2rem;
     position: fixed;
     height: 100%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
 }
 
 .sidebar-header {
     margin-bottom: 2rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #ffffff;
 }
+
 
 .sidebar-nav {
     list-style: none;
@@ -41,10 +47,13 @@
     height: 4rem;
     margin-left: -2rem;
     margin-right: -2rem;
+    text-transform: uppercase; 
 }
 
 .nav-item:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: #00b4db; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02); 
 }
 
 /* Main Content */
@@ -52,14 +61,21 @@
     flex: 1;
     margin-left: 250px;
     padding: 2rem;
+    background: #f9f9f9; 
 }
 
+/* Welcome Section */
 .welcome-section {
     background: white;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
+}
+
+.welcome-section:hover {
+    transform: scale(1.01);
+    transition: transform 0.3s ease-in-out; 
 }
 
 /* Search & Filters */
@@ -67,8 +83,13 @@
     background: white;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-filters:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .search-filters input[type="text"] {
@@ -78,6 +99,12 @@
     border-radius: 4px;
     margin-bottom: 1rem;
     font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.search-filters input[type="text"]:focus {
+    border-color: #0083b0; 
+    outline: none;
 }
 
 .search-filters .filters {
@@ -96,6 +123,21 @@
     font-size: 1rem;
     background: white;
     cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.search-filters select:focus,
+.search-filters input[type="date"]:focus {
+    border-color: #0083b0;
+    outline: none;
+}
+
+.search-filters select:hover,
+.search-filters input[type="date"]:hover,
+.search-filters input[type="text"]:hover {
+    background-color: #e0f7fa; 
+    border-color: #0083b0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
 .search-filters .action-btn {
@@ -107,10 +149,12 @@
     border-radius: 4px;
     cursor: pointer;
     transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .search-filters .action-btn:hover {
     background: #00b4db;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); 
 }
 
 /* Search Results Table */
@@ -142,9 +186,11 @@
 }
 
 .search-results tr:hover {
-    background-color: #f1f1f1;
+    background-color: #e0f7fa; 
     cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
+
 
 .search-results td {
     color: #333;
@@ -154,7 +200,7 @@
     padding: 0.8rem 1rem;
 }
 
-/* Responsive Adjustments for Table */
+
 @media (max-width: 768px) {
     .search-results table {
         font-size: 0.9rem;
@@ -165,14 +211,12 @@
     }
 }
 
-/* Responsive Adjustments */
+
 @media (max-width: 768px) {
-    /* Sidebar becomes horizontal below the header */
     .dashboard-container {
         flex-direction: column;
     }
 
-    /* Sidebar becomes a horizontal bar */
     .sidebar {
         width: 100%;
         height: auto;
@@ -183,7 +227,6 @@
         align-items: center;
     }
 
-    /* Sidebar navigation aligns items horizontally */
     .sidebar-nav {
         display: flex;
         flex-direction: row;
@@ -193,7 +236,6 @@
         margin: 0;
     }
 
-    /* Navigation items are evenly spaced and centered */
     .nav-item {
         flex: 1;
         text-align: center;
@@ -205,19 +247,16 @@
         margin: 0 5px;
     }
 
-    /* Adjust main content margin */
     .main-content {
         margin-left: 0;
         padding: 1rem;
     }
 
-    /* Stack filters for better readability */
     .search-filters .filters {
         flex-direction: row;
         gap: 0.5rem;
     }
 
-    /* Adjust result items for smaller screens */
     .result-item {
         flex-direction: column;
         align-items: flex-start;
