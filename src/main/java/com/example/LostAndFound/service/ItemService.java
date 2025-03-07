@@ -1,20 +1,17 @@
 package com.example.LostAndFound.service;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.io.IOException;
-import java.io.ByteArrayInputStream;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import net.coobird.thumbnailator.Thumbnails;
-import java.io.ByteArrayOutputStream;
-import java.util.Base64;
 
 import com.example.LostAndFound.dto.DashboardResponse;
 import com.example.LostAndFound.dto.ItemDto;
@@ -23,6 +20,8 @@ import com.example.LostAndFound.entity.ItemStatus;
 import com.example.LostAndFound.entity.User;
 import com.example.LostAndFound.repository.ItemRepository;
 import com.example.LostAndFound.repository.UserRepository;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 @Service
 public class ItemService {
@@ -107,45 +106,6 @@ public class ItemService {
                 .toOutputStream(byteArrayOutputStream);
 
         return byteArrayOutputStream.toByteArray();
-    }
-
-    public List<Item> searchItems(String searchQuery, String itemType, String status, LocalDateTime filterDate) {
-        if(status != null) status = status.toLowerCase();
-
-        if (searchQuery != null && !searchQuery.isEmpty() && itemType != null && !itemType.isEmpty() && status != null && !status.isEmpty() && filterDate != null) {
-            // All filters provided
-            return itemRepository.findAllByItemNameContainingIgnoreCaseAndItemTypeContainingIgnoreCaseAndStatusAndDateReportedAfter(
-                searchQuery, itemType, ItemStatus.valueOf(status), filterDate);
-        } else if (searchQuery != null && !searchQuery.isEmpty() && itemType != null && !itemType.isEmpty() && status != null && !status.isEmpty()) {
-            // Only search query, itemType, and status provided
-            return itemRepository.findAllByItemNameContainingIgnoreCaseAndItemTypeContainingIgnoreCaseAndStatus(
-                searchQuery, itemType, ItemStatus.valueOf(status));
-        } else if (searchQuery != null && !searchQuery.isEmpty() && itemType != null && !itemType.isEmpty()) {
-            // Only search query and itemType provided
-            return itemRepository.findAllByItemNameContainingIgnoreCaseAndItemTypeContainingIgnoreCase(
-                searchQuery, itemType);
-        } else if (searchQuery != null && !searchQuery.isEmpty() && status != null && !status.isEmpty()) {
-            // Only search query and status provided
-            return itemRepository.findAllByItemNameContainingIgnoreCaseAndStatus(
-                searchQuery, ItemStatus.valueOf(status));
-        } else if (itemType != null && !itemType.isEmpty() && status != null && !status.isEmpty()) {
-            // Only itemType and status provided
-            return itemRepository.findAllByItemTypeContainingIgnoreCaseAndStatus(
-                itemType, ItemStatus.valueOf(status));
-        } else if (itemType != null && !itemType.isEmpty()) {
-            // Only itemType provided
-            return itemRepository.findAllByItemTypeContainingIgnoreCase(itemType);
-        } else if (status != null && !status.isEmpty()) {
-            // Only status provided
-            return itemRepository.findAllByStatus(ItemStatus.valueOf(status));
-        } else if (filterDate != null) {
-            // Only date filter provided
-            return itemRepository.findAllByDateReportedAfter(filterDate);
-        } else if(searchQuery != null){
-            return itemRepository.findByItemNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(searchQuery, searchQuery);
-        } else {
-            return itemRepository.findAll();
-        }
     }
     
 }
