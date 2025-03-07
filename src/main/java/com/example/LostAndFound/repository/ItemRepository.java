@@ -12,9 +12,6 @@ import com.example.LostAndFound.dto.LostItemView;
 import com.example.LostAndFound.entity.Item;
 import com.example.LostAndFound.entity.ItemStatus;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
         @Query(value = """
