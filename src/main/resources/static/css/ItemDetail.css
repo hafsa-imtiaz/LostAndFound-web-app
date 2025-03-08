@@ -1,168 +1,137 @@
-/* Base Styles (similar to what you had in SearchItem.css) */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
 }
 
-body {
-    background-color: #f5f5f5;
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 2rem;
 }
 
-.dashboard-container {
-    display: flex;
-    min-height: 100vh;
+.welcome-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
 }
 
-/* Sidebar Styles */
+/* Sidebar */
 .sidebar {
     width: 250px;
-    background-color: #2c3e50;
+    background: #0083b0;
     color: white;
-    padding: 20px 0;
+    padding: 2rem;
+    position: fixed;
+    height: 100%;
+    
 }
 
 .sidebar-header {
-    padding: 0 20px 20px;
-    border-bottom: 1px solid #34495e;
+    margin-bottom: 2rem;
 }
 
 .sidebar-nav {
     list-style: none;
-    margin-top: 20px;
+    padding: 0;
 }
 
 .nav-item {
-    padding: 15px 20px;
+    background: #006a8d;
+    margin: 0rem 0;
+    padding: 0.8rem 2rem;
+    border-radius: 0;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: 0.3s;
+    width: calc(100% + 4rem);
+    height: 4rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
 }
 
 .nav-item:hover {
-    background-color: #34495e;
+    background: rgba(255, 255, 255, 0.1);
 }
 
-#logout {
-    margin-top: 50px;
-    color: #e74c3c;
-}
 
-/* Main Content Styles */
-.main-content {
-    flex-grow: 1;
-    padding: 30px;
-}
-
-.welcome-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.welcome-section h1 {
-    color: #2c3e50;
-}
-
-.back-btn {
-    padding: 8px 15px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.back-btn:hover {
-    background-color: #2980b9;
-}
-
-/* Item Details Styles */
-.item-details-container {
-    background-color: white;
+.item-details {
+    background: white;
+    padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 25px;
-}
-
-.item-details-card {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.item-property {
-    margin-bottom: 15px;
-}
-
-.item-property h3 {
-    color: #7f8c8d;
-    margin-bottom: 5px;
-    font-size: 14px;
-}
-
-.item-property p {
-    color: #2c3e50;
-    font-size: 16px;
-}
-
-/* Item Description takes full width */
-.item-property:nth-child(5) {
-    grid-column: span 2;
-}
-
-.item-actions {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-    margin-top: 30px;
+    gap: 2rem;
 }
 
-.action-btn {
-    padding: 10px 20px;
+.item-details .item-images {
+    flex: 1;
+    max-width: 50%;
+}
+
+.item-details .main-image {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.item-details .thumbnail-gallery {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.item-details .thumbnail-gallery img {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.item-details .thumbnail-gallery img:hover {
+    transform: scale(1.1);
+}
+
+.item-details .item-info {
+    flex: 1;
+}
+
+.item-details h2 {
+    margin-bottom: 1rem;
+    color: #0083b0;
+    font-size: 1.8rem;
+}
+
+.item-details p {
+    margin: 0.5rem 0;
+    color: #666;
+    font-size: 1rem;
+}
+
+.item-details p strong {
+    color: #333;
+}
+
+.item-details .action-btn {
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background: #0083b0;
+    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    transition: 0.3s;
 }
 
-#claimBtn {
-    background-color: #2ecc71;
-    color: white;
+.item-details .action-btn:hover {
+    background: #00b4db;
 }
 
-#claimBtn:hover {
-    background-color: #27ae60;
-}
-
-#contactBtn {
-    background-color: #3498db;
-    color: white;
-}
-
-#contactBtn:hover {
-    background-color: #2980b9;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .dashboard-container {
-        flex-direction: column;
-    }
-    
-    .sidebar {
-        width: 100%;
-    }
-    
-    .item-details-card {
-        grid-template-columns: 1fr;
-    }
-    
-    .item-property:nth-child(5) {
-        grid-column: span 1;
-    }
-}
