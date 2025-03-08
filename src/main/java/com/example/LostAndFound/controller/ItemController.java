@@ -1,8 +1,8 @@
 package com.example.LostAndFound.controller;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -69,14 +69,15 @@ public class ItemController {
         return itemRepository.findItemsWithUsernameByStatus("found"); 
     }
 
-    @GetMapping("/search")
-    public List<Item> searchItems(
-        @RequestParam(required = false) String category,
-        @RequestParam(required = false) String status,
-        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date
+    @GetMapping("/filter")
+    public List<Item> filterItems(
+        @RequestParam(value = "searchQuery", required = false) String searchQuery,
+        @RequestParam(value = "itemType", required = false) String itemType,
+        @RequestParam(value = "status", required = false) String status,
+        @RequestParam(value = "filterDate", required = false)
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime filterDate
     ) {
-        // If you want to handle "no filters" as "return all", or do partial matches, etc.
-        return itemService.searchItems(category, status, date);
+        return itemService.searchItems(searchQuery, itemType, status, filterDate);
     }
     
 

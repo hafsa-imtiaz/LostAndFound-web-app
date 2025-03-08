@@ -1,33 +1,95 @@
 document.addEventListener("DOMContentLoaded", () => {
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("userType");
+    localStorage.removeItem("userId");
+
     const btnLogin = document.getElementById("btnLogin");
     const btnSignup = document.getElementById("btnSignup");
     const loginForm = document.getElementById("loginForm");
     const signupForm = document.getElementById("signupForm");
-    //const signupError = document.getElementById("signupError");
     const loginError = document.getElementById("loginError");
+    const signupError = document.getElementById("signupError");
 
-    // Initially show the login form
-    btnLogin.disabled = true;
-    btnSignup.disabled = false;
-    loginForm.classList.remove("hidden");
-    signupForm.classList.add("hidden");
+    signupForm.querySelectorAll('input').forEach(input => input.value = '');
+    loginForm.querySelectorAll('input').forEach(input => input.value = '');
+    // show Toast Notifications
+    function showToast(message, type) {
+        const toastContainer = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.classList.add('toast', type);
+
+        // Add icon to the toast (success or error)
+        const icon = document.createElement('span');
+        icon.classList.add('toast-icon');
+        if (type === 'success') {
+            icon.innerHTML = '&#10003;'; // Checkmark for success
+        } else if (type === 'error') {
+            icon.innerHTML = '&#10060;'; // Cross for error
+        }
+
+        const messageContainer = document.createElement('div');
+        messageContainer.classList.add('toast-message');
+        messageContainer.textContent = message;
+
+        const closeButton = document.createElement('button');
+        closeButton.classList.add('toast-close');
+        closeButton.innerHTML = '&times;'; // X for closing the toast
+        closeButton.addEventListener('click', () => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.remove();
+            }, 500);
+        });
+
+        toast.appendChild(icon);
+        toast.appendChild(messageContainer);
+        toast.appendChild(closeButton);
+        toastContainer.appendChild(toast);
+
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 100);
+
+        // Remove the toast after 4 seconds if not manually closed
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.remove();
+            }, 500);
+        }, 4000);
+    }
+
 
     // Toggle to Login Form
     btnLogin.addEventListener("click", () => {
+        signupForm.querySelectorAll('input').forEach(input => input.value = '');
         loginForm.classList.remove("hidden");
         signupForm.classList.add("hidden");
         btnLogin.disabled = true;
         btnSignup.disabled = false;
-        signupError.textContent = ""; // Clear any previous errors
+        signupError.textContent = "";
+
+        // Transition for login form
+        loginForm.style.opacity = 0;
+        setTimeout(() => {
+            loginForm.style.opacity = 1;
+        }, 200);
     });
 
     // Toggle to Signup Form
     btnSignup.addEventListener("click", () => {
+        loginForm.querySelectorAll('input').forEach(input => input.value = '');
         signupForm.classList.remove("hidden");
         loginForm.classList.add("hidden");
         btnSignup.disabled = true;
         btnLogin.disabled = false;
-        loginError.textContent = ""; // Clear any previous errors
+        loginError.textContent = "";
+
+        // Transition for signup form
+        signupForm.style.opacity = 0;
+        setTimeout(() => {
+            signupForm.style.opacity = 1;
+        }, 200);
     });
 
     // Handle Login Form Submission
@@ -47,26 +109,25 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (response.ok) {
-                console.log("yahan");
-                const user = await response.json(); // Extract user data
-                console.log("yahan");
-                localStorage.setItem("loggedInUser", user.username); // Store logged-in user's username
+                const user = await response.json(); 
+                localStorage.setItem("loggedInUser", user.username); 
                 localStorage.setItem("userType", user.userType);
                 localStorage.setItem("userId", user.userId);
+                showToast("Login successful! Welcome back.", 'success');
                 if(user.userType === "Admin")
-                    window.location.href = "AdminPanel.html"; // Redirect to user dashboard
+                    window.location.href = "AdminPanel.html"; 
                 else
-                    window.location.href = "userhome.html"; userhome.html
+                    window.location.href = "userhome.html";
             } else {
                 const errorData = await response.json();
-                loginError.textContent = errorData.message || "Log-In failed. Invalid Email or Password. Please try again.";
+                console.log(errorData);
+                showToast("Log-In failed. " + errorData.error + "Please try again.", 'error');
             }
         } catch (error) {
             console.log(error);
-            alert("Server error. Please try again later.");
+            showToast("Server error. Please try again later.", 'error');
         }
     });
-
 
     // Handle Signup Form Submission
     signupForm.addEventListener("submit", async (e) => {
@@ -81,11 +142,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const password = document.getElementById("signupPassword").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
 
-        //signupError.textContent = " "; // Clear previous errors
-
-        // Basic validation
         if (password !== confirmPassword) {
-            signupError.textContent = "Passwords do not match!";
+            showToast("Passwords do not match!", 'error');
             return;
         }
 
@@ -97,16 +155,16 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (response.ok) {
-                alert("Signup successful! Please log in.");
-                btnLogin.click(); // Switch to login form after successful signup
+                showToast("Signup successful! Please log in.", 'success');
+                btnLogin.click(); 
             } else {
                 const errorData = await response.json();
-                alert(errorData.message || "Signup failed. Please try again.");
+                showToast("Signup failed: " + errorData.error + "\nPlease try again.", 'error');
             }
         } catch (error) {
-            alert("Server error. Please try again later.");
+            showToast("Server error. Please try again later.", 'error');
         }
     });
+
+    btnLogin.click();
 });
-
-
