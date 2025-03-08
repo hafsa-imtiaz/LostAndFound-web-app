@@ -93,20 +93,39 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function updateTable(items) {
-      const tableBody = document.getElementById('searchTableBody');
-      tableBody.innerHTML = '';
-      items.forEach(item => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-              <td>${item.itemId}</td>
-              <td>${item.itemName}</td>
-              <td>${item.itemType}</td>
-              <td>${item.status}</td>
-              <td>${item.description}</td>
-              <td>${item.location}</td>
-              <td>${item.dateReported}</td>
-          `;
-          tableBody.appendChild(row);
-      });
-  }
+    const tableBody = document.getElementById("searchTableBody");
+    tableBody.innerHTML = "";
+
+    if (!items || items.length === 0) {
+        tableBody.innerHTML = "<tr><td colspan='7'>No items found</td></tr>";
+        return;
+    }
+
+    items.forEach(item => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${item.itemId}</td>
+            <td>${item.itemName}</td>
+            <td>${item.itemType}</td>
+            <td>${item.status}</td>
+            <td>${item.description}</td>
+            <td>${item.location}</td>
+            <td>${item.dateReported ? new Date(item.dateReported).toLocaleDateString() : ""}</td>
+        `;
+
+        row.style.cursor = "pointer";
+
+        // Store the selected item's details in localStorage on click
+        row.addEventListener("click", () => {
+            localStorage.setItem("selectedItem", JSON.stringify(item));
+            window.location.href = "itemDetails.html"; // Redirect to details page
+        });
+
+        tableBody.appendChild(row);
+    });
+}
+
 });
+
+
